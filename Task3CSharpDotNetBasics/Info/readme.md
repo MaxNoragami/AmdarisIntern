@@ -1,4 +1,4 @@
-# Version Control and Git
+# C# and .NET Basics
 ## Requirements
 
 Requirements for my assignment on the Git and Version Control Lesson
@@ -14,15 +14,15 @@ Requirements for my assignment on the Git and Version Control Lesson
 
 ## Solution
 
-In order to satisfy the ***Real-world object modeling*** requirement, I have decided to create a simple *restaurant ordering system* with menus, menu items, and an ordering system.
+- In order to satisfy the ***Real-world object modeling*** requirement, I have decided to create a simple *restaurant ordering system* with menus, menu items, and an ordering system.
 
-While, creating the classes I have aimed for a proper ***encapsulation*** of the internal state of the instances, via ***getters and setters***, while also being mindful regarding the use of the right ***C# code conventions***.
+- While, creating the classes I have aimed for a proper ***encapsulation*** of the internal state of the instances, via ***getters and setters***, while also being mindful regarding the use of the right ***C# code conventions***.
 
-Moreover, as for ***class hierarchy***, I have implemented a base abstract class `MenuItem`, that gets inherited and its abstract and virtual methods ***overridden*** within classes, such as `MainCourse` or `Appetizer`.
+- Moreover, as for ***class hierarchy***, I have implemented a base abstract class `MenuItem`, that gets inherited and its abstract and virtual methods ***overridden*** within classes, such as `MainCourse` or `Appetizer`.
 
-At the same time, I made sure not to forget about the *static polymorphism* implementation as well, as I have ***overloaded*** the `Display()` method within the `MenuItem` class, for either a simple or detailed print of the details regarding an dish.
+- At the same time, I made sure not to forget about the *static polymorphism* implementation as well, as I have ***overloaded*** the `Display()` method within the `MenuItem` class, for either a simple or detailed print of the details regarding an dish.
 
-Last but not least, I have also decided to adventure a little with something that I hadn't been that knowledgeable of prior to doing this assignment, those topic being the **IEnumerable** and ***ICloneable*** interfaces. Those have been mainly used to create clones of existing dishes from the `Menu`, if we talk about the `ICloneable`, and as for the `IEnumerable`, it has mainly been used to allow iteration through the items of the `Menu` or `Order` classes.
+- Last but not least, I have also decided to adventure a little with something that I hadn't been that knowledgeable of prior to doing this assignment, those topic being the **IEnumerable** and ***ICloneable*** interfaces. Those have been mainly used to create clones of existing dishes from the `Menu`, if we talk about the `ICloneable`, and as for the `IEnumerable`, it has mainly been used to allow iteration through the items of the `Menu` or `Order` classes.
 
 #### Classes Explanation
 ##### `MenuItem`
