@@ -1,78 +1,70 @@
 ﻿using Items;
 using OrderSystem;
+using MenuSystem;
 
-namespace Task3CSharpDotNetBasics
-{
-    class Program
-    {
-        static void Main()
-        {
-            // Menu instance
-            Menu menu = CreateExampleMenu();
-            menu.DisplayMenu();
+// Menu instance
+Menu menu = CreateExampleMenu();
+menu.DisplayMenu();
 
-            Console.WriteLine();
+Console.WriteLine();
 
-            // Order instance
-            Order order = CreateExampleOrder(menu);
-            order.DisplayOrder();
+// Order instance
+Order order = CreateExampleOrder(menu);
+order.DisplayOrder();
 
-            Console.WriteLine();
+Console.WriteLine();
 
-            // All menu items, usage of IEnumerable
-            Console.WriteLine("All Menu Items:");
-            foreach (MenuItem item in menu)
-            {
-                item.Display(true);
-                Console.WriteLine();
-            }
+// All menu items, usage of IEnumerable
+Console.WriteLine("All Menu Items:");
+foreach (MenuItem item in menu)
+    item.Display(true);
+    Console.WriteLine();
                 
-            Console.WriteLine();
+Console.WriteLine();
 
-            // All order items, usage of IEnumerable
-            Console.WriteLine("All Order Items:");
-            foreach (OrderItem item in order)
-                Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.Item.Name, item.Item.Price);
-        }
+// All order items, usage of IEnumerable
+Console.WriteLine("All Order Items:");
+foreach (OrderItem item in order)
+    Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.Item.Name, item.Item.Price);
 
-        private static Menu CreateExampleMenu()
-        {
-            Menu menu = new Menu("British Cusine");
 
-            MenuItem deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
-            MenuItem vegetablesSoup = new MainCourse("Veggies Soup", new List<string>() { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
-            MenuItem pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
+// Helper methods
+Menu CreateExampleMenu()
+{
+    Menu menu = new Menu("British Cusine");
 
-            // Cloned 'MainCourse'
-            MenuItem chickenSoup = (MenuItem)vegetablesSoup.Clone();
-            chickenSoup.AddIngredient("Chicken");
+    MenuItem deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
+    MenuItem vegetablesSoup = new MainCourse("Veggies Soup", new List<string>() { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
+    MenuItem pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
 
-            menu.AddItem(vegetablesSoup);
-            menu.AddItem(deviledEgg);
-            menu.AddItem(chickenSoup);
-            menu.AddItem(pizza);
+    // Cloned 'MainCourse'
+    MenuItem chickenSoup = (MenuItem)vegetablesSoup.Clone();
+    chickenSoup.AddIngredient("Chicken");
 
-            return menu;
-        }
+    menu.AddItem(vegetablesSoup);
+    menu.AddItem(deviledEgg);
+    menu.AddItem(chickenSoup);
+    menu.AddItem(pizza);
 
-        private static Order CreateExampleOrder(Menu menu)
-        {
-            Order order = new Order(1234);
+    return menu;
+}
 
-            MenuItem pizza = (MainCourse)menu.GetItemByName("Pizza");
+Order CreateExampleOrder(Menu menu)
+{
+    Order order = new Order(1234);
 
-            // Custom Order
-            if(pizza != null)
-            {
-                MenuItem pizzaMario = (MainCourse)pizza.Clone();
-                pizzaMario.AddIngredient("Chicken Breast");
-                pizzaMario.AddIngredient("Broccoli");
-                order.AddItem(pizzaMario, 2, "Extra chicken please :p");
+    MenuItem pizza = (MainCourse)menu.GetItemByName("Pizza");
 
-                order.AddItem(pizza);
-            }
+    // Custom Order
+    if(pizza != null)
+    {
+        MenuItem pizzaMario = (MainCourse)pizza.Clone();
+        pizzaMario.AddIngredient("Chicken Breast");
+        pizzaMario.AddIngredient("Broccoli");
+        order.AddItem(pizzaMario, 2, "Extra chicken please :p");
 
-            return order;
-        }
+        order.AddItem(pizza);
     }
+
+    return order;
 }

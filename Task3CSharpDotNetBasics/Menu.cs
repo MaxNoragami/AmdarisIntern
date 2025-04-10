@@ -1,7 +1,7 @@
 using Items;
 using System.Collections;
 
-namespace Task3CSharpDotNetBasics
+namespace MenuSystem
 {
     class Menu : IEnumerable<MenuItem>
     {
