@@ -1,6 +1,7 @@
 ﻿using Items;
 using OrderSystem;
 using MenuSystem;
+using System.Collections.ObjectModel;
 
 // Menu instance
 var menu = CreateExampleMenu();
@@ -33,13 +34,14 @@ Menu CreateExampleMenu()
 {
     var menu = new Menu("British Cusine");
 
-    var deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
-    var vegetablesSoup = new MainCourse("Veggies Soup", new List<string>() { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
-    var pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
+    var deviledEgg = new Appetizer("Deviled Eggs", new ReadOnlyCollection<string>(new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" } ), 75m, 4, true, false);
+    var vegetablesSoup = new MainCourse("Veggies Soup", new ReadOnlyCollection<string>( new List<string> { "Water", "Potatoes", "Cucumbers", "Bell Pepper" } ), 90m, true, false);
+    var pizza = new MainCourse("Pizza", new ReadOnlyCollection<string>( new List<string>() { "Dough", "Cheese", "Tomatoes" } ), 100m, false, false);
 
     // Cloned 'MainCourse'
     var chickenSoup = (MenuItem)vegetablesSoup.Clone();
     chickenSoup.AddIngredient("Chicken");
+
 
     menu.AddItem(vegetablesSoup);
     menu.AddItem(deviledEgg);

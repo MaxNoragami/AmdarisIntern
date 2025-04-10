@@ -1,62 +1,52 @@
 using Items;
 using System.Collections;
 
-namespace MenuSystem
+namespace MenuSystem;
+
+class Menu : IEnumerable<MenuItem>
 {
-    class Menu : IEnumerable<MenuItem>
+    private readonly List<MenuItem> _items;
+    public string Name { get; private set; }
+
+    public Menu(string name)
     {
-        private string _name = string.Empty;
-        private readonly List<MenuItem> _items;
+        Name = name;
+        _items = new List<MenuItem>();
+    }
 
-        public string Name 
-        { 
-            get { return _name; }
-            private set { _name = value ?? throw new ArgumentNullException(nameof(value)); }
-        }
+    public void AddItem(MenuItem item) { _items.Add(item); }
 
-        public Menu(string name)
-        {
-            Name = name;
-            _items = new List<MenuItem>();
-        }
+    public MenuItem GetItemByName(string name)
+    {
+        return _items.Find(i => i.Name.ToLower() == name.ToLower()) ?? throw new ArgumentNullException(nameof(name));
+    }
 
-        public void AddItem(MenuItem item)
-        {
-            _items.Add(item);
-        }
-
-        public MenuItem GetItemByName(string name)
-        {
-            return _items.Find(i => i.Name.ToLower() == name.ToLower()) ?? throw new ArgumentNullException(nameof(name));
-        }
-
-        public void DisplayMenu()
-        {
-            Console.WriteLine("******** {0} ********", Name);
+    public void DisplayMenu()
+    {
+        Console.WriteLine("******** {0} ********", Name);
             
-            if(_items.Count == 0)
-            {
-                Console.WriteLine("No items in the menu, yet.");
-                return;
-            }
-
-            foreach(var item in _items)
-            {
-                item.Display();
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("******** ******** ********");
-        }
-
-        public IEnumerator GetEnumerator()
+        if(_items.Count == 0)
         {
-            return _items.GetEnumerator();
+            Console.WriteLine("No items in the menu, yet.");
+            return;
         }
 
-        IEnumerator<MenuItem> IEnumerable<MenuItem>.GetEnumerator()
+        foreach(var item in _items)
         {
-            return (IEnumerator<MenuItem>)GetEnumerator();
+            item.Display();
+            Console.WriteLine();
         }
+
+        Console.WriteLine("******** ******** ********");
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return _items.GetEnumerator();
+    }
+
+    IEnumerator<MenuItem> IEnumerable<MenuItem>.GetEnumerator()
+    {
+        return (IEnumerator<MenuItem>)GetEnumerator();
     }
 }
