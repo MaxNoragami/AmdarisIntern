@@ -40,7 +40,7 @@ namespace MenuSystem
                 return;
             }
 
-            foreach(MenuItem item in _items)
+            foreach(var item in _items)
             {
                 item.Display();
                 Console.WriteLine();

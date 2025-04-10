@@ -29,7 +29,7 @@ namespace Items
 
         public override string GetSpecialRequirements()
         {
-			StringBuilder specialRequirements = new StringBuilder();
+			var specialRequirements = new StringBuilder();
 
 			specialRequirements.Append((IsServedHot) ? "Served Hot " : "Served Cold ");
 			specialRequirements.Append((IsGlutenFree) ? "Gluten Free " : "Has Gluten ");

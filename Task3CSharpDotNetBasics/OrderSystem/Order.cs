@@ -27,7 +27,7 @@ namespace OrderSystem
         {
             decimal subtotal = 0;
 
-            foreach(OrderItem item in _items) subtotal += item.GetSubtotal();
+            foreach(var item in _items) subtotal += item.GetSubtotal();
 
             return subtotal;
         }
@@ -44,7 +44,7 @@ namespace OrderSystem
             Console.WriteLine();
 
             Console.WriteLine("Items:");
-            foreach(OrderItem item in _items)
+            foreach(var item in _items)
             {
                 Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.Item.Name, item.Item.Price);
 

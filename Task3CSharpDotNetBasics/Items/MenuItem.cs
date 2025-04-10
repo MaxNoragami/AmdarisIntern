@@ -62,7 +62,7 @@
 
         public object Clone()
         {
-            MenuItem clone = (MenuItem)MemberwiseClone();
+            var clone = (MenuItem)MemberwiseClone();
             clone.Ingredients = [.. Ingredients];
             return clone;
         }

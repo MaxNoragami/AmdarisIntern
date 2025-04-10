@@ -38,7 +38,7 @@ namespace Items
 
         public override string GetSpecialRequirements()
         {
-            StringBuilder specialRequirements = new StringBuilder();
+            var specialRequirements = new StringBuilder();
 
             specialRequirements.Append((IsShareable)? "Shareable ": "Not Shareable ");
             specialRequirements.Append((IsSeasonal) ? "Seasonal " : "Not Seasonal ");

@@ -3,13 +3,13 @@ using OrderSystem;
 using MenuSystem;
 
 // Menu instance
-Menu menu = CreateExampleMenu();
+var menu = CreateExampleMenu();
 menu.DisplayMenu();
 
 Console.WriteLine();
 
 // Order instance
-Order order = CreateExampleOrder(menu);
+var order = CreateExampleOrder(menu);
 order.DisplayOrder();
 
 Console.WriteLine();
@@ -24,21 +24,21 @@ Console.WriteLine();
 
 // All order items, usage of IEnumerable
 Console.WriteLine("All Order Items:");
-foreach (OrderItem item in order)
+foreach (var item in order)
     Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.Item.Name, item.Item.Price);
 
 
 // Helper methods
 Menu CreateExampleMenu()
 {
-    Menu menu = new Menu("British Cusine");
+    var menu = new Menu("British Cusine");
 
-    MenuItem deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
-    MenuItem vegetablesSoup = new MainCourse("Veggies Soup", new List<string>() { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
-    MenuItem pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
+    var deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
+    var vegetablesSoup = new MainCourse("Veggies Soup", new List<string>() { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
+    var pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
 
     // Cloned 'MainCourse'
-    MenuItem chickenSoup = (MenuItem)vegetablesSoup.Clone();
+    var chickenSoup = (MenuItem)vegetablesSoup.Clone();
     chickenSoup.AddIngredient("Chicken");
 
     menu.AddItem(vegetablesSoup);
@@ -51,14 +51,14 @@ Menu CreateExampleMenu()
 
 Order CreateExampleOrder(Menu menu)
 {
-    Order order = new Order(1234);
+    var order = new Order(1234);
 
-    MenuItem pizza = (MainCourse)menu.GetItemByName("Pizza");
+    var pizza = (MainCourse)menu.GetItemByName("Pizza");
 
     // Custom Order
     if(pizza != null)
     {
-        MenuItem pizzaMario = (MainCourse)pizza.Clone();
+        var pizzaMario = (MainCourse)pizza.Clone();
         pizzaMario.AddIngredient("Chicken Breast");
         pizzaMario.AddIngredient("Broccoli");
         order.AddItem(pizzaMario, 2, "Extra chicken please :p");
