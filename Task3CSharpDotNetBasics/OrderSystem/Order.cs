@@ -45,7 +45,7 @@ class Order : IEnumerable<OrderItem>
         Console.WriteLine("Items:");
         foreach(var item in _items)
         {
-            Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.Item.Name, item.Item.Price);
+            Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.GetName(), item.GetPrice());
 
             if(!string.IsNullOrWhiteSpace(item.Note))
             {

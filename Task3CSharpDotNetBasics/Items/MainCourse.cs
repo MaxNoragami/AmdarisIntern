@@ -3,17 +3,14 @@ using System.Collections.ObjectModel;
 using System.Text;
 namespace Items;
 
-class MainCourse : MenuItem
+class MainCourse(string name, 
+                ReadOnlyCollection<string> ingredients, 
+                decimal price, 
+                bool isServedHot, 
+                bool isGlutenFree) : MenuItem(name, ingredients, price)
 {
-    public bool IsServedHot { get; set; }
-	public bool IsGlutenFree { get; set; }
-
-	public MainCourse(string name, ReadOnlyCollection<string> ingredients, decimal price, bool isServedHot, bool isGlutenFree) 
-        : base(name, ingredients, price)
-    {
-        IsServedHot = isServedHot;
-        IsGlutenFree = isGlutenFree;
-    }
+    public bool IsServedHot => isServedHot;
+    public bool IsGlutenFree => isGlutenFree;
 
     public override string GetSpecialRequirements()
     {

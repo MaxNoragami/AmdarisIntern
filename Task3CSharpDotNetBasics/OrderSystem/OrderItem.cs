@@ -2,18 +2,12 @@ using Items;
 
 namespace OrderSystem;
 
-class OrderItem
+class OrderItem (MenuItem item, int quantity, string note)
 {
-    public MenuItem Item { get; }
-    public string Note { get; }
-    public int Quantity { get; }
+    public string Note => note;
+    public int Quantity => quantity;
 
-    public OrderItem(MenuItem item, int quantity, string note)
-    {
-        Item = item;
-        Quantity = quantity;
-        Note = note;
-    }
-
-    public decimal GetSubtotal() { return Item.Price * Quantity; }
+    public decimal GetPrice() { return item.Price; }
+    public string GetName() { return item.Name; }
+    public decimal GetSubtotal() { return item.Price * quantity; }
 }

@@ -6,8 +6,8 @@ abstract class MenuItem : ICloneable
     private List<string> _ingredientsList;
 
     public string Name { get; set; }
-    public ReadOnlyCollection<string> Ingredients { get; set; }
-    public decimal Price { get; set; }
+    public ReadOnlyCollection<string> Ingredients { get; private set; }
+    public decimal Price { get; private set; }
 
     protected MenuItem(string name, ReadOnlyCollection<string> ingredients, decimal price)
     {
@@ -25,7 +25,6 @@ abstract class MenuItem : ICloneable
             throw new ArgumentNullException(nameof(ingredient));
 
         _ingredientsList.Add(ingredient);
-
     }
 
     public void RemoveIngredient(string ingredient)
