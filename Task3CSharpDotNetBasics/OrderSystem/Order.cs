@@ -11,12 +11,12 @@ class Order : IEnumerable<OrderItem>
     public DateTime OrderTime { get; }
     public decimal TaxRate { get; }
 
-    public Order(int orderId)
+    public Order(int orderId, decimal taxRate = 0.12m)
     {
         OrderId = orderId;
         OrderTime = DateTime.Now;
-        TaxRate = 0.12m;
-        _items = new List<OrderItem>();
+        TaxRate = taxRate;
+        _items = [];
     }
 
     public void AddItem(MenuItem item, int quantity = 1, string note = "")
