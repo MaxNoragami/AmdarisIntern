@@ -25,6 +25,6 @@ class Appetizer(string name,
     public override void Display()
     {
         base.Display();
-		Console.WriteLine("Servings: {0}", Servings);
+		Console.WriteLine($"Servings: {Servings}");
 	}
 }

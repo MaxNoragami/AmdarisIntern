@@ -37,14 +37,14 @@ abstract class MenuItem : ICloneable
 
     public virtual void Display()
     {
-        Console.WriteLine("{0} : {1:F2} MDL", Name, Price);
-        Console.WriteLine("Ingredients: {0}", string.Join(", ", Ingredients));
+        Console.WriteLine($"{Name} : {Price:F2} MDL");
+        Console.WriteLine($"Ingredients: {string.Join(", ", Ingredients)}");
     }
 
     public virtual void Display(bool showRequirements)
     {
         Display();
-        if (showRequirements) Console.WriteLine("Special Requirements: {0}", GetSpecialRequirements());
+        if (showRequirements) Console.WriteLine($"Special Requirements: {GetSpecialRequirements()}");
     }
 
     public object Clone()

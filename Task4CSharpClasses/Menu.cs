@@ -23,7 +23,7 @@ class Menu : IEnumerable<MenuItem>
 
     public void DisplayMenu()
     {
-        Console.WriteLine("******** {0} ********", Name);
+        Console.WriteLine($"******** {Name} ********");
             
         if(_items.Count == 0)
         {

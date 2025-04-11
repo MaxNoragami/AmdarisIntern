@@ -38,25 +38,25 @@ class Order : IEnumerable<OrderItem>
     public void DisplayOrder()
     {
         Console.WriteLine("******** ORDER ********");
-        Console.WriteLine("Order ID: {0}", OrderId);
-        Console.WriteLine("Date & Time: {0}", OrderTime);
+        Console.WriteLine($"Order ID: {OrderId}");
+        Console.WriteLine($"Date & Time: {OrderTime}");
         Console.WriteLine();
 
         Console.WriteLine("Items:");
         foreach(var item in _items)
         {
-            Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.GetName(), item.GetPrice());
+            Console.WriteLine($"{item.Quantity}x {item.GetName()} : {item.GetPrice():F2} MDL");
 
             if(!string.IsNullOrWhiteSpace(item.Note))
             {
-                Console.WriteLine("Note: {0}", item.Note);
+                Console.WriteLine($"Note: {item.Note}");
             }
         }
         Console.WriteLine();
 
-        Console.WriteLine("Subtotal: {0:F2} MDL", GetSubtotal());
-        Console.WriteLine("Tax: {0:F2} MDL", GetTax());
-        Console.WriteLine("TOTAL: {0:F2} MDL", GetTotal());
+        Console.WriteLine($"Subtotal: {GetSubtotal():F2} MDL");
+        Console.WriteLine($"Tax: {GetTax():F2} MDL");
+        Console.WriteLine($"TOTAL: {GetTotal():F2} MDL");
         Console.WriteLine("******** THANK YOU ********");
     }
 

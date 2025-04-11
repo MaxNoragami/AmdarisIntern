@@ -26,7 +26,7 @@ Console.WriteLine();
 // All order items, usage of IEnumerable
 Console.WriteLine("All Order Items:");
 foreach (var item in order)
-    Console.WriteLine("{0}x {1} : {2:F2} MDL", item.Quantity, item.GetName(), item.GetPrice());
+    Console.WriteLine($"{item.Quantity}x {item.GetName()} : {item.GetPrice():F2} MDL");
 
 
 // Helper methods
@@ -39,8 +39,7 @@ Menu CreateExampleMenu()
     var pizza = new MainCourse("Pizza", new ReadOnlyCollection<string>(new List<string>() { "Dough", "Cheese", "Tomatoes" }), 100m, false, false);
 
     // Cloned 'MainCourse'
-    var chickenSoup = vegetablesSoup.Clone() as MainCourse;
-    if (chickenSoup is not null)
+    if (vegetablesSoup.Clone() is MainCourse chickenSoup)
     {
         chickenSoup.AddIngredient("Chicken");
         menu.AddItem(chickenSoup);
@@ -57,13 +56,10 @@ Order CreateExampleOrder(Menu menu)
 {
     var order = new Order(1234);
 
-    var pizza = menu.GetItemByName("Pizza") as MainCourse;
-
     // Custom Order
-    if (pizza is not null)
+    if (menu.GetItemByName("Pizza") is MainCourse pizza)
     {
-        var pizzaMario = pizza.Clone() as MainCourse;
-        if (pizzaMario is not null)
+        if (pizza.Clone() is MainCourse pizzaMario)
         {
             pizzaMario.AddIngredient("Chicken Breast");
             pizzaMario.AddIngredient("Broccoli");
