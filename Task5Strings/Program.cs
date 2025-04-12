@@ -10,28 +10,64 @@ string text = @"In object-oriented programming, encapsulation is a fundamental p
 //- 4. Display this string in reverse, without using any C# language feature. (Create your own algorithm)
 //- 5. In the given string, replace all occurances of "object-oriented programming" with "OOP" and display the new string
 
-Console.WriteLine($"1. Word Count: {WordCount(text)}\n");
-Console.WriteLine($"2. Sentence Count: {SentenceCount(text)}\n");
-Console.WriteLine($"3. Occurences of 'encapsulation': {WordOccurences(text)}\n");
+Console.WriteLine($"1. Word Count: {WordCountRegex(text)}\n");
+Console.WriteLine($"2. Sentence Count: {SentenceCountRegex(text)}\n");
+Console.WriteLine($"3. Occurences of 'encapsulation': {WordOccurrencesRegex(text)}\n");
 Console.WriteLine($"4. Reverse String: {ReverseString(text)}\n");
 Console.WriteLine($"5. Replace String: {ReplaceString(text)}\n");
 
 
-int WordCount(string inputText)
+// Word Count
+int WordCountRegex(string inputText)
     => Regex.Replace(inputText, @"[,.!?]+", string.Empty).Split(' ', '-').Length;
 
-int SentenceCount(string inputText)
+int WordCount(string inputText)
+{
+    foreach(var symbol in new List<char>() { ',', '.', '!', '?' }) inputText.Replace(symbol, '\0');
+    return inputText.Split(' ', '-').Length;
+}
+
+// Sentence Count
+int SentenceCountRegex(string inputText)
     => Regex.Matches(inputText, @"[.?!]+").Count;
 
-int WordOccurences(string inputText, string word = "encapsulation")
-    => Regex.Matches(inputText, @"(" + word + @")").Count;
+int SentenceCount(string inputText)
+{
+    var sentenceCount = 0;
+    foreach (var symbol in inputText)
+    {
+        if(symbol == '.' || symbol == '!' || symbol == '?') sentenceCount += 1;
+    }
+    return sentenceCount;  
+}
 
+// Word Occurrences
+int WordOccurrencesRegex(string inputText, string word = "encapsulation")
+    => Regex.Matches(inputText.ToLower(), @"(" + word.ToLower() + @")").Count;
+
+int WordOccurrences(string inputText, string word = "encapsulation")
+{
+    var occurrences = 0;
+
+    foreach (var symbol in new List<char>() { ',', '.', '!', '?' }) inputText.Replace(symbol, '\0');
+    var words = inputText.Split(' ', '-');
+
+    foreach (var w in words)
+    {
+        if (string.Equals(w, word, StringComparison.OrdinalIgnoreCase)) occurrences += 1;
+    }
+
+    return occurrences;
+}
+
+// ReverseString
 string ReverseString(string inputText)
 {
     var reversedText = new StringBuilder();
-    for (int i = inputText.Length - 1; i >= 0; i--) reversedText.Append(inputText[i]);
+    for (var i = inputText.Length - 1; i >= 0; i--) reversedText.Append(inputText[i]);
     return reversedText.ToString();
 }
 
+// Replace String
 string ReplaceString(string inputText, string replaceable = "object-oriented programming", string replacement = "OOP")
-    => Regex.Replace(inputText, @"(" + replaceable + @")", replacement);
+    => Regex.Replace(inputText.ToLower(), @"(" + replaceable.ToLower() + @")", replacement);
