@@ -6,14 +6,14 @@ abstract class MenuItem : ICloneable
     private List<string> _ingredientsList;
 
     public string Name { get; set; }
-    public ReadOnlyCollection<string> Ingredients { get; private set; }
+    public IReadOnlyCollection<string> Ingredients { get; private set; }
     public decimal Price { get; private set; }
 
-    protected MenuItem(string name, ReadOnlyCollection<string> ingredients, decimal price)
+    protected MenuItem(string name, List<string> ingredients, decimal price)
     {
         Name = name;
         _ingredientsList = [.. ingredients];
-        Ingredients = new ReadOnlyCollection<string>(_ingredientsList);
+        Ingredients = [.. _ingredientsList];
         Price = price;
     }
 
@@ -51,7 +51,7 @@ abstract class MenuItem : ICloneable
     {
         var clone = (MenuItem)MemberwiseClone();
         clone._ingredientsList = [.. _ingredientsList];
-        clone.Ingredients = new ReadOnlyCollection<string>(Ingredients);
+        clone.Ingredients = [.. Ingredients];
         return clone;
     }
 }
