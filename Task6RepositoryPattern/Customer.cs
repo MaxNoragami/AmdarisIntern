@@ -4,6 +4,8 @@ internal class Customer(int id, string name, string surname, decimal balance) : 
 {
     public string Name { get; private set; } = name;
     public string Surname { get; private set; } = surname;
-    public decimal Balance { get; private set; } = balance;
+    public decimal Balance { get; set; } = balance;
+
+
 }
 
