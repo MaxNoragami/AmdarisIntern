@@ -24,6 +24,7 @@ internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop
 
         if(!laptop.InStock)
         {
+            RemoveFromShelf(laptop);
             Console.WriteLine($"There are no more {laptop.Brand} {laptop.Model} in stock.");
             return false;
         }
@@ -45,4 +46,22 @@ internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop
         return true;
     }
 
+    public void ShowAllStock()
+    {
+        Console.WriteLine("All Laptops in stock: ");
+        foreach(var laptop in _laptopRepository.FindAll())
+            Console.WriteLine($"{laptop.Brand} {laptop.Model} : ${laptop.Price} : {laptop.StockAmount} units");
+    }
+
+    public void AddOnShelf(Laptop laptop)
+    {
+        _laptopRepository.Add(laptop);
+        Console.WriteLine($"New latop in stock: {laptop.Brand} {laptop.Model} at only ${laptop.Price}.");
+    }
+
+    public void RemoveFromShelf(Laptop laptop)
+    {
+        _laptopRepository.Delete(laptop);
+        Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
+    }
 }
