@@ -7,5 +7,7 @@ internal class Laptop(int id, string brand, string model, decimal price, int sto
     public decimal Price { get; private set; } = price;
     public int StockAmount { get; set; } = stock;
     public bool InStock { get; set; } = inStock;
+
+    public override object Clone() => ((Laptop)base.Clone()).MemberwiseClone();
 }
 
