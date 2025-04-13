@@ -12,13 +12,13 @@ internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop
 
         if(customer == null)
         {
-            Console.WriteLine($"Customer {customer.Id} not found!");
+            Console.WriteLine($"Customer {customerId} not found!");
             return false;
         }
 
         if(laptop == null)
         {
-            Console.WriteLine($"Laptop {laptop.Id} not found!");
+            Console.WriteLine($"Laptop {laptopId} not found!");
             return false;
         }
 

@@ -1,8 +1,6 @@
-﻿using Task6RepositoryPattern;
+﻿namespace Task6RepositoryPattern;
 
-namespace Task6RepositoryPatter;
-
-internal class ListRepository<T>(IList<T> items) where T : Entity, IRepository<T>
+internal class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 {
     private IList<T> _items = items;
 
