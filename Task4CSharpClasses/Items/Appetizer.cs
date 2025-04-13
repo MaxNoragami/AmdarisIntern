@@ -3,7 +3,7 @@ using System.Text;
 namespace Items;
 
 class Appetizer(string name, 
-                ReadOnlyCollection<string> ingredients, 
+                List<string> ingredients, 
                 decimal price, int servings, 
                 bool isShareable, 
                 bool isSeasonal) : MenuItem(name, ingredients, price) 

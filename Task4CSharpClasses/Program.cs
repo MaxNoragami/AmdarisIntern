@@ -34,9 +34,9 @@ Menu CreateExampleMenu()
 {
     var menu = new Menu("British Cusine");
 
-    var deviledEgg = new Appetizer("Deviled Eggs", new ReadOnlyCollection<string>(new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }), 75m, 4, true, false);
-    var vegetablesSoup = new MainCourse("Veggies Soup", new ReadOnlyCollection<string>(new List<string> { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }), 90m, true, false);
-    var pizza = new MainCourse("Pizza", new ReadOnlyCollection<string>(new List<string>() { "Dough", "Cheese", "Tomatoes" }), 100m, false, false);
+    var deviledEgg = new Appetizer("Deviled Eggs", new List<string>() { "Eggs", "Mayo", "Mustard", "Pepper" }, 75m, 4, true, false);
+    var vegetablesSoup = new MainCourse("Veggies Soup", new List<string> { "Water", "Potatoes", "Cucumbers", "Bell Pepper" }, 90m, true, false);
+    var pizza = new MainCourse("Pizza", new List<string>() { "Dough", "Cheese", "Tomatoes" }, 100m, false, false);
 
     // Cloned 'MainCourse'
     if (vegetablesSoup.Clone() is MainCourse chickenSoup)

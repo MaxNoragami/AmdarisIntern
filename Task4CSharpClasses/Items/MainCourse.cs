@@ -3,7 +3,7 @@ using System.Text;
 namespace Items;
 
 class MainCourse(string name, 
-                ReadOnlyCollection<string> ingredients, 
+                List<string> ingredients, 
                 decimal price, 
                 bool isServedHot, 
                 bool isGlutenFree) : MenuItem(name, ingredients, price)
