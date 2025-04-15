@@ -10,18 +10,6 @@ internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop
         var customer = _customerRepository.GetById(customerId);
         var laptop = _laptopRepository.GetById(laptopId);
 
-        if(customer == null)
-        {
-            Console.WriteLine($"Customer {customerId} not found!");
-            return false;
-        }
-
-        if(laptop == null)
-        {
-            Console.WriteLine($"Laptop {laptopId} not found!");
-            return false;
-        }
-
         if(!laptop.InStock)
         {
             RemoveFromShelf(laptop);

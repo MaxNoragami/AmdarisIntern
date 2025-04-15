@@ -1,5 +1,6 @@
 ﻿using Task7Exceptions;
 
+// Init of laptops or customers instances
 var hpLaptop = new Laptop(id: 2, brand: "HP", model: "Aero 13", price: 600m, stock: 1, inStock: true);
 
 var laptops = new List<Laptop>() { 
@@ -14,10 +15,13 @@ var customers = new List<Customer>()
     new Customer(id: 2, name: "John", surname: "Doe", balance: 5000m)
 };
 
+// Repositories and shopinit
 var laptopRepo = new ListRepository<Laptop>(laptops);
 var customerRepo = new ListRepository<Customer>(customers);
 
 var shop = new Shop(customerRepo, laptopRepo);
+
+// Testing the repo
 
 // Show all laptops
 shop.ShowAllStock();
