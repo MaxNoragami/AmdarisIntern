@@ -1,6 +1,6 @@
 ﻿namespace Task7Exceptions;
 
-internal class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
+public class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 {
     private readonly IList<T> _items = items;
 

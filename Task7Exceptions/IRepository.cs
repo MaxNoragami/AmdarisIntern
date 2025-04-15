@@ -1,6 +1,6 @@
 ﻿namespace Task7Exceptions;
 
-internal interface IRepository<T> where T : Entity
+public interface IRepository<T> where T : Entity
 {
     T GetById(int id);
     IList<T> FindAll();

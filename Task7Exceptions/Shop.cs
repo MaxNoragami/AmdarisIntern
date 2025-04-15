@@ -1,37 +1,56 @@
-﻿namespace Task7Exceptions;
+﻿using Task7Exceptions.ExceptionClasses;
 
-internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> laptopRepository)
+namespace Task7Exceptions;
+
+public class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> laptopRepository)
 {
     private readonly IRepository<Customer> _customerRepository = customerRepository;
     private readonly IRepository<Laptop> _laptopRepository = laptopRepository;
 
     public bool PurchaseLaptop(int customerId, int laptopId)
     {
-        var customer = _customerRepository.GetById(customerId);
-        var laptop = _laptopRepository.GetById(laptopId);
-
-        if(!laptop.InStock)
+        try
         {
-            RemoveFromShelf(laptop);
-            Console.WriteLine($"There are no more {laptop.Brand} {laptop.Model} in stock.");
+            var customer = _customerRepository.GetById(customerId);
+            var laptop = _laptopRepository.GetById(laptopId);
+
+            ValidateIds();
+
+            if (!laptop.InStock)
+                throw new OutOfStockException(laptop);
+
+            if (customer.Balance < laptop.Price)
+                throw new InsufficientBalanceException(customer, laptop);
+
+            customer.Balance -= laptop.Price;
+            laptop.StockAmount -= 1;
+            laptop.InStock = laptop.StockAmount != 0;
+
+            _customerRepository.Update(customer);
+            _laptopRepository.Update(laptop);
+
+            Console.WriteLine($"The purchase of {laptop.Brand} {laptop.Model} has been completed successfully by {customer.Name} {customer.Surname}.");
+            return true;
+        }
+        catch(DataValidationException<int> ex)
+        {
+            throw;
+        }
+        catch (OutOfStockException ex)
+        {
+            Console.WriteLine(ex.Message);
             return false;
         }
-
-        if(customer.Balance < laptop.Price)
+        catch(InsufficientBalanceException ex)
         {
-            Console.WriteLine("You are broke...");
+            Console.WriteLine(ex.Message);
             return false;
         }
-
-        customer.Balance -= laptop.Price;
-        laptop.StockAmount -= 1;
-        laptop.InStock = laptop.StockAmount != 0;
-
-        _customerRepository.Update(customer);
-        _laptopRepository.Update(laptop);
-
-        Console.WriteLine($"The purchase of {laptop.Brand} {laptop.Model} has been completed successfully by {customer.Name} {customer.Surname}.");
-        return true;
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
     }
 
     public void ShowAllStock()
@@ -51,5 +70,10 @@ internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop
     {
         _laptopRepository.Delete(laptop);
         Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
+    }
+    private void ValidateIds(params int[] ids)
+    {
+        if (ids.Any(i => i <= 0))
+            throw new DataValidationException<int>(ids);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Task7Exceptions;
 
-internal class Customer(int id, string name, string surname, decimal balance) : Entity(id) 
+public class Customer(int id, string name, string surname, decimal balance) : Entity(id) 
 {
     public string Name { get; private set; } = name;
     public string Surname { get; private set; } = surname;

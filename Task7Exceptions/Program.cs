@@ -21,11 +21,13 @@ var customerRepo = new ListRepository<Customer>(customers);
 
 var shop = new Shop(customerRepo, laptopRepo);
 
-// Testing the repo
 
 // Show all laptops
 shop.ShowAllStock();
 Console.WriteLine();
+
+// Try to purchase a Laptop
+shop.PurchaseLaptop(customerId: 1, laptopId: 1);
 
 // Purchase of an out of stock laptop
 shop.PurchaseLaptop(customerId: 1, laptopId: 3);

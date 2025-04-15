@@ -1,6 +1,6 @@
 ﻿namespace Task7Exceptions;
 
-internal abstract class Entity(int id) : ICloneable
+public abstract class Entity(int id) : ICloneable
 {
     public int Id { get; private set; } = id;
 
