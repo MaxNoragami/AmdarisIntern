@@ -2,7 +2,7 @@
 
 internal class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 {
-    private IList<T> _items = items;
+    private readonly IList<T> _items = items;
 
     public T Add(T entity)
     {

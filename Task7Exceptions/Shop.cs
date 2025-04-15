@@ -2,8 +2,8 @@
 
 internal class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> laptopRepository)
 {
-    IRepository<Customer> _customerRepository = customerRepository;
-    IRepository<Laptop> _laptopRepository = laptopRepository;
+    private readonly IRepository<Customer> _customerRepository = customerRepository;
+    private readonly IRepository<Laptop> _laptopRepository = laptopRepository;
 
     public bool PurchaseLaptop(int customerId, int laptopId)
     {
