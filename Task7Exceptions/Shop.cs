@@ -71,7 +71,7 @@ public class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> 
         _laptopRepository.Delete(laptop);
         Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
     }
-    private void ValidateIds(params int[] ids)
+    static private void ValidateIds(params int[] ids)
     {
         if (ids.Any(i => i <= 0))
             throw new DataValidationException<int>(ids);
