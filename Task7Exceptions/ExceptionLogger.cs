@@ -10,7 +10,7 @@ public class ExceptionLogger : IDisposable
     {
         _logFilePath = (File.Exists(logFilePath)) ? 
                 logFilePath : 
-                throw new ArgumentException("File path is not existent");
+                throw new ArgumentException("File path is not existent", nameof(logFilePath));
 
         _logWriter = new StreamWriter(File.Open(_logFilePath,
                                                 FileMode.Append,

@@ -2,10 +2,13 @@
 
 namespace Task7Exceptions;
 
-public class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> laptopRepository)
+public class Shop(IRepository<Customer> customerRepository, 
+                                        IRepository<Laptop> laptopRepository, 
+                                        ExceptionLogger exceptionLogger)
 {
     private readonly IRepository<Customer> _customerRepository = customerRepository;
     private readonly IRepository<Laptop> _laptopRepository = laptopRepository;
+    private readonly ExceptionLogger _exceptionLogger = exceptionLogger;
 
     public bool PurchaseLaptop(int customerId, int laptopId)
     {
@@ -32,23 +35,36 @@ public class Shop(IRepository<Customer> customerRepository, IRepository<Laptop> 
             Console.WriteLine($"The purchase of {laptop.Brand} {laptop.Model} has been completed successfully by {customer.Name} {customer.Surname}.");
             return true;
         }
+        catch(ArgumentException ex) when (ex.ParamName == "logFilePath")
+        {
+            throw new FileNotFoundException("The log file path is incorrect.", innerException: ex);
+        }
         catch(DataValidationException<int> ex)
         {
+            _exceptionLogger.LogException(ex);
             throw;
         }
         catch (OutOfStockException ex)
         {
-            Console.WriteLine(ex.Message);
+            _exceptionLogger.LogException(ex);
             return false;
         }
         catch(InsufficientBalanceException ex)
         {
-            Console.WriteLine(ex.Message);
+            _exceptionLogger.LogException(ex);
             return false;
+        }
+        catch (ArgumentNullException)
+        {
+            throw;
+        }
+        catch (ArgumentException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            _exceptionLogger.LogException(ex);
             return false;
         }
     }
