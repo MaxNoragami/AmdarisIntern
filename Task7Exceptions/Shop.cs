@@ -17,7 +17,7 @@ public class Shop(IRepository<Customer> customerRepository,
             var customer = _customerRepository.GetById(customerId);
             var laptop = _laptopRepository.GetById(laptopId);
 
-            ValidateIds();
+            ValidateIds(customerId, laptopId);
 
             if (!laptop.InStock)
                 throw new OutOfStockException(laptop);

@@ -1,4 +1,5 @@
-﻿using Task7Exceptions;
+﻿using System.Diagnostics;
+using Task7Exceptions;
 using Task7Exceptions.ExceptionClasses;
 
 // Init of laptops or customers instances
@@ -28,11 +29,10 @@ using (var logger = new ExceptionLogger("exceptions.log"))
 
     try
     {
+        throw new Exception("An even tinier exception.");
         // Show all laptops
         shop.ShowAllStock();
         Console.WriteLine();
-        
-        // logger.Dispose(true);
 
         // Try to purchase a Laptop
         shop.PurchaseLaptop(customerId: 1, laptopId: 1);
@@ -85,14 +85,17 @@ using (var logger = new ExceptionLogger("exceptions.log"))
     catch (Exception ex)
     { 
         Console.WriteLine("Unknown Exception Occurred.");
-
-#if DEBUG
-        Console.ForegroundColor = ConsoleColor.DarkRed;
-        Console.WriteLine($"[DEBUG] Exception : {ex.GetType().Name}\n" +
-            $"Message : {ex.Message}\n" +
-            $"StackTrace : {ex.StackTrace}\n" +
-            $"InnerException : {ex.InnerException}");
-        Console.ResetColor();
-#endif
+        UnknownExceptionDebug(ex);
     }
+}
+
+[Conditional("DEBUG")]
+static void UnknownExceptionDebug(Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine($"[DEBUG] Exception : {ex.GetType().Name}\n" +
+        $"Message : {ex.Message}\n" +
+        $"StackTrace : {ex.StackTrace}\n" +
+        $"InnerException : {ex.InnerException}");
+    Console.ResetColor();
 }
