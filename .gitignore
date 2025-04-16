@@ -654,7 +654,7 @@ sketch
 
 # Built Visual Studio Code Extensions
 *.vsix
-
+*.log
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history

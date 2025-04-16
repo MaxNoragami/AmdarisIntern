@@ -71,21 +71,44 @@ public class Shop(IRepository<Customer> customerRepository,
 
     public void ShowAllStock()
     {
-        Console.WriteLine("All Laptops in stock: ");
-        foreach(var laptop in _laptopRepository.FindAll())
-            Console.WriteLine($"{laptop.Brand} {laptop.Model} : ${laptop.Price} : {laptop.StockAmount} units");
+        try
+        {
+            Console.WriteLine("All Laptops in stock: ");
+            foreach(var laptop in _laptopRepository.FindAll())
+                Console.WriteLine($"{laptop.Brand} {laptop.Model} : ${laptop.Price} : {laptop.StockAmount} units");
+        }
+        catch (ArgumentException ex)
+        {
+            _exceptionLogger.LogException(ex);
+        }
+        
     }
 
     public void AddOnShelf(Laptop laptop)
     {
-        _laptopRepository.Add(laptop);
-        Console.WriteLine($"New latop in stock: {laptop.Brand} {laptop.Model} at only ${laptop.Price}.");
+        try
+        {
+            _laptopRepository.Add(laptop);
+            Console.WriteLine($"New latop in stock: {laptop.Brand} {laptop.Model} at only ${laptop.Price}.");
+        }
+        catch (DuplicateIdException ex)
+        {
+            _exceptionLogger.LogException(ex);
+        }
     }
 
     public void RemoveFromShelf(Laptop laptop)
     {
-        _laptopRepository.Delete(laptop);
-        Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
+        try 
+        {
+            _laptopRepository.Delete(laptop);
+            Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
+        }
+        catch (ArgumentException ex)
+        {
+            _exceptionLogger.LogException(ex);
+        }
+        
     }
     static private void ValidateIds(params int[] ids)
     {

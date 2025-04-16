@@ -29,7 +29,7 @@ public class ExceptionLogger : IDisposable
         _logWriter?.WriteLine($"Message: {ex.Message}");
         _logWriter?.WriteLine($"Stack Trace: {ex.StackTrace}");
 
-        _logWriter?.WriteLine(new string('*', 60));
+        _logWriter?.WriteLine(new string('*', 120));
         _logWriter?.Flush();
 
     }

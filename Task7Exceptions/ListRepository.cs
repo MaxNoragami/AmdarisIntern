@@ -1,4 +1,6 @@
-﻿namespace Task7Exceptions;
+﻿using Task7Exceptions.ExceptionClasses;
+
+namespace Task7Exceptions;
 
 public class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 {
@@ -6,6 +8,8 @@ public class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 
     public T Add(T entity)
     {
+        if (_items.Any(e => e.Id == entity.Id))
+            throw new DuplicateIdException(entity);
         _items.Add((T)entity.Clone());
         return entity;
     }
