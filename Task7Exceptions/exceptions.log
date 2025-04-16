@@ -1,0 +1,36 @@
+[25-04-16 00:44:58] - Exception: InsufficientBalanceException
+Message: Customer : Maxim Alexei has insufficient balance, Customer ID : 1, Available : 700, Deficit : 700.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 26
+************************************************************
+[25-04-16 00:44:58] - Exception: OutOfStockException
+Message: Laptop : Lenovo Legion 5 is out of stock, ID : 3, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************
+[25-04-16 00:44:58] - Exception: OutOfStockException
+Message: Laptop : IBM Thinkpad x1 is out of stock, ID : 1, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************
+[25-04-16 11:44:52] - Exception: InsufficientBalanceException
+Message: Customer : Maxim Alexei has insufficient balance, Customer ID : 1, Available : 700, Deficit : 700.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 26
+************************************************************************************************************************
+[25-04-16 11:44:52] - Exception: OutOfStockException
+Message: Laptop : Lenovo Legion 5 is out of stock, ID : 3, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************************************************************************
+[25-04-16 11:44:52] - Exception: OutOfStockException
+Message: Laptop : IBM Thinkpad x1 is out of stock, ID : 1, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************************************************************************
+[25-04-16 12:55:56] - Exception: InsufficientBalanceException
+Message: Customer : Maxim Alexei has insufficient balance, Customer ID : 1, Available : 700, Deficit : 700.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 26
+************************************************************************************************************************
+[25-04-16 12:55:56] - Exception: OutOfStockException
+Message: Laptop : Lenovo Legion 5 is out of stock, ID : 3, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************************************************************************
+[25-04-16 12:55:56] - Exception: OutOfStockException
+Message: Laptop : IBM Thinkpad x1 is out of stock, ID : 1, Available : 0.
+Stack Trace:    at Task7Exceptions.Shop.PurchaseLaptop(Int32 customerId, Int32 laptopId) in C:\Users\max\Documents\GitHubForks\AmdarisIntern\Task7Exceptions\Shop.cs:line 23
+************************************************************************************************************************
