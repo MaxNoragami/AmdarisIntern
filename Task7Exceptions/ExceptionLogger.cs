@@ -34,29 +34,14 @@ public class ExceptionLogger : IDisposable
 
     }
 
-    public void Dispose(bool disposing)
+    public void Dispose()
     {
-        if (_disposed)
-            return;
-
-        if(disposing)
+        if(!_disposed)
         {
             _logWriter?.Flush();
             _logWriter?.Dispose();
             _logWriter = null;
+            _disposed = true;
         }
-
-        _disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    ~ExceptionLogger()
-    {
-        Dispose(false);
     }
 }
