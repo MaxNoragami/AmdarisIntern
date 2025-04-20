@@ -1,4 +1,4 @@
-﻿namespace Task7Exceptions.ExceptionClasses;
+﻿namespace Task11FileSystemStreams.ExceptionClasses;
 
 public class DataValidationException<T> : Exception
 {

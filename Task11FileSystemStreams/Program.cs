@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
 using Task11FileSystemStreams;
+using Task11FileSystemStreams.ExceptionClasses;
 using Task11FileSystemStreams.Entities;
-using Task7Exceptions;
-using Task7Exceptions.ExceptionClasses;
 using Task11FileSystemStreams.Repositories;
 
 // Init of laptops or customers instances

@@ -1,6 +1,4 @@
-﻿using Task11FileSystemStreams;
-
-namespace Task7Exceptions;
+﻿namespace Task11FileSystemStreams;
 
 public static class Logger
 {

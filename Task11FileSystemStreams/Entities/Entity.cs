@@ -1,4 +1,4 @@
-﻿namespace Task7Exceptions;
+﻿namespace Task11FileSystemStreams.Entities;
 
 public abstract class Entity(int id) : ICloneable
 {

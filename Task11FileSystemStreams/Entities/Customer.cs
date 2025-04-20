@@ -1,6 +1,4 @@
-﻿using Task7Exceptions;
-
-namespace Task11FileSystemStreams.Entities;
+﻿namespace Task11FileSystemStreams.Entities;
 
 public class Customer(int id, string name, string surname, decimal balance) : Entity(id) 
 {

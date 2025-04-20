@@ -1,9 +1,8 @@
-﻿using Task11FileSystemStreams;
-using Task11FileSystemStreams.Entities;
+﻿using Task11FileSystemStreams.Entities;
 using Task11FileSystemStreams.Repositories;
-using Task7Exceptions.ExceptionClasses;
+using Task11FileSystemStreams.ExceptionClasses;
 
-namespace Task7Exceptions;
+namespace Task11FileSystemStreams;
 
 public class Shop(IRepository<Customer> customerRepository, 
                                         IRepository<Laptop> laptopRepository)

@@ -1,6 +1,6 @@
 ﻿using Task11FileSystemStreams.Entities;
 
-namespace Task7Exceptions.ExceptionClasses;
+namespace Task11FileSystemStreams.ExceptionClasses;
 
 public class InsufficientBalanceException : Exception
 {
