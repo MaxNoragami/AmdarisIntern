@@ -1,4 +1,6 @@
-﻿namespace Task7Exceptions;
+﻿using Task7Exceptions;
+
+namespace Task11FileSystemStreams.Entities;
 
 public class Laptop(int id, string brand, string model, decimal price, int stock, bool inStock) : Entity(id)
 {

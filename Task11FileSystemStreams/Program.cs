@@ -1,6 +1,9 @@
 ﻿using System.Diagnostics;
+using Task11FileSystemStreams;
+using Task11FileSystemStreams.Entities;
 using Task7Exceptions;
 using Task7Exceptions.ExceptionClasses;
+using Task11FileSystemStreams.Repositories;
 
 // Init of laptops or customers instances
 var hpLaptop = new Laptop(id: 2, brand: "HP", model: "Aero 13", price: 600m, stock: 1, inStock: true);
@@ -21,10 +24,10 @@ var customers = new List<Customer>()
 var laptopRepo = new ListRepository<Laptop>(laptops);
 var customerRepo = new ListRepository<Customer>(customers);
 
-var logger = new Logger();
 var shop = new Shop(customerRepo, laptopRepo);
 
-shop.BusinessOperation += logger.Log;
+// Subscribing the logger to the event from shop
+shop.BusinessOperation += Logger.Log;
 
 try
 {
@@ -63,22 +66,24 @@ try
 
     shop.ShowAllStock();
     Console.WriteLine();
+
+    Logger.ViewLog();
 }
 catch (FileNotFoundException ex)
 {
-    Console.WriteLine(ex.Message, ex.StackTrace, ex.InnerException);
+    Logger.Log(null, new BusinessOperationEventArgs(methodName: "Main", success: false, exception: ex));
 }
 catch (DataValidationException<int> ex)
 {
-    // logger.Log(ex);
+    Logger.Log(null, new BusinessOperationEventArgs(methodName: "Main", success: false, exception: ex));
 }
 catch (ArgumentNullException ex)
 {
-    // logger.Log(ex);
+    Logger.Log(null, new BusinessOperationEventArgs(methodName: "Main", success: false, exception: ex));
 }
 catch (ArgumentException ex)
 {
-    // logger.Log(ex);
+    Logger.Log(null, new BusinessOperationEventArgs(methodName: "Main", success: false, exception: ex));
 }
 catch (Exception ex)
 { 

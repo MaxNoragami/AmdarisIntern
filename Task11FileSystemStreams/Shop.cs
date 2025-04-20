@@ -1,4 +1,6 @@
 ﻿using Task11FileSystemStreams;
+using Task11FileSystemStreams.Entities;
+using Task11FileSystemStreams.Repositories;
 using Task7Exceptions.ExceptionClasses;
 
 namespace Task7Exceptions;

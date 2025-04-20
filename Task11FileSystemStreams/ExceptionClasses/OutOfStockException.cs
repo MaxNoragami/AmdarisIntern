@@ -1,4 +1,6 @@
-﻿namespace Task7Exceptions.ExceptionClasses;
+﻿using Task11FileSystemStreams.Entities;
+
+namespace Task7Exceptions.ExceptionClasses;
 
 public class OutOfStockException : Exception
 {

@@ -1,6 +1,6 @@
 ﻿namespace Task7Exceptions.ExceptionClasses;
 
-internal class DataValidationException<T> : Exception
+public class DataValidationException<T> : Exception
 {
     public DataValidationException() : base("The set data is not valid") { }
     public DataValidationException(string message) : base(message) { }

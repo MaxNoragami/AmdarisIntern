@@ -1,6 +1,7 @@
-﻿using Task7Exceptions.ExceptionClasses;
+﻿using Task7Exceptions;
+using Task7Exceptions.ExceptionClasses;
 
-namespace Task7Exceptions;
+namespace Task11FileSystemStreams.Repositories;
 
 public class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
 {
@@ -26,7 +27,7 @@ public class ListRepository<T>(IList<T> items) : IRepository<T> where T : Entity
     {
         var item = _items.FirstOrDefault(e => e.Id == id);
         if (item == null) throw new ArgumentException(nameof(id), $"No {typeof(T)} of id {id} has been found.");
-        return (T)(item).Clone();
+        return (T)item.Clone();
     }
 
     public void Update(T entity)

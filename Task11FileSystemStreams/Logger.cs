@@ -2,10 +2,10 @@
 
 namespace Task7Exceptions;
 
-public class Logger
+public static class Logger
 {
     
-    public void Log(object? sender, BusinessOperationEventArgs eventArgs)
+    public static void Log(object? sender, BusinessOperationEventArgs eventArgs)
     {
         var momentInTime = DateTime.Now;
         var dateOnly = DateOnly.FromDateTime(momentInTime);
@@ -34,5 +34,16 @@ public class Logger
         }
     }
 
+    public static void ViewLog()
+    {
+        var momentInTime = DateTime.Now;
+        var dateOnly = DateOnly.FromDateTime(momentInTime);
 
+        using (var logReader = new StreamReader($"Logs/{dateOnly:yyyy-MMM-dd}.txt"))
+        {
+            Console.WriteLine("********** Daily Log **********\n");
+            for(var line = logReader.ReadLine(); line != null; line = logReader.ReadLine())
+                Console.WriteLine(line);
+        }
+    }
 }

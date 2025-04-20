@@ -1,4 +1,6 @@
-﻿namespace Task7Exceptions;
+﻿using Task7Exceptions;
+
+namespace Task11FileSystemStreams.Repositories;
 
 public interface IRepository<T> where T : Entity
 {
