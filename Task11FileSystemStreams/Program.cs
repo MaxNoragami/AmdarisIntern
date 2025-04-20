@@ -21,73 +21,71 @@ var customers = new List<Customer>()
 var laptopRepo = new ListRepository<Laptop>(laptops);
 var customerRepo = new ListRepository<Customer>(customers);
 
-Console.WriteLine();
+var logger = new Logger();
+var shop = new Shop(customerRepo, laptopRepo, logger);
 
-using (var logger = new ExceptionLogger("exceptions.log"))
+shop.BusinessOperation += logger.Log;
+
+try
 {
-    var shop = new Shop(customerRepo, laptopRepo, logger);
+    // Show all laptops
+    shop.ShowAllStock();
+    Console.WriteLine();
 
-    try
-    {
-        throw new Exception("An even tinier exception.");
-        // Show all laptops
-        shop.ShowAllStock();
-        Console.WriteLine();
+    // Try to purchase a Laptop
+    shop.PurchaseLaptop(customerId: 1, laptopId: 1);
 
-        // Try to purchase a Laptop
-        shop.PurchaseLaptop(customerId: 1, laptopId: 1);
+    // Purchase of an out of stock laptop
+    shop.PurchaseLaptop(customerId: 1, laptopId: 3);
 
-        // Purchase of an out of stock laptop
-        shop.PurchaseLaptop(customerId: 1, laptopId: 3);
+    // Purchase of laptops until stock runs out
+    shop.PurchaseLaptop(customerId: 2, laptopId: 1);
+    shop.PurchaseLaptop(customerId: 2, laptopId: 1);
+    shop.PurchaseLaptop(customerId: 2, laptopId: 1);
 
-        // Purchase of laptops until stock runs out
-        shop.PurchaseLaptop(customerId: 2, laptopId: 1);
-        shop.PurchaseLaptop(customerId: 2, laptopId: 1);
-        shop.PurchaseLaptop(customerId: 2, laptopId: 1);
+    shop.ShowAllStock();
+    Console.WriteLine();
 
-        shop.ShowAllStock();
-        Console.WriteLine();
+    // Purchase of a laptop
+    shop.PurchaseLaptop(customerId: 1, laptopId: 2);
 
-        // Purchase of a laptop
-        shop.PurchaseLaptop(customerId: 1, laptopId: 2);
+    shop.ShowAllStock();
+    Console.WriteLine();
 
-        shop.ShowAllStock();
-        Console.WriteLine();
+    // Removing a laptop
+    shop.RemoveFromShelf(hpLaptop);
 
-        // Removing a laptop
-        shop.RemoveFromShelf(hpLaptop);
+    shop.ShowAllStock();
+    Console.WriteLine();
 
-        shop.ShowAllStock();
-        Console.WriteLine();
+    // Adding a laptop
+    shop.AddOnShelf(hpLaptop);
 
-        // Adding a laptop
-        shop.AddOnShelf(hpLaptop);
-
-        shop.ShowAllStock();
-        Console.WriteLine();
-    }
-    catch (FileNotFoundException ex)
-    {
-        Console.WriteLine(ex.Message, ex.StackTrace, ex.InnerException);
-    }
-    catch (DataValidationException<int> ex)
-    {
-        logger.LogException(ex);
-    }
-    catch (ArgumentNullException ex)
-    {
-        logger.LogException(ex);
-    }
-    catch (ArgumentException ex)
-    {
-        logger.LogException(ex);
-    }
-    catch (Exception ex)
-    { 
-        Console.WriteLine("Unknown Exception Occurred.");
-        UnknownExceptionDebug(ex);
-    }
+    shop.ShowAllStock();
+    Console.WriteLine();
 }
+catch (FileNotFoundException ex)
+{
+    Console.WriteLine(ex.Message, ex.StackTrace, ex.InnerException);
+}
+catch (DataValidationException<int> ex)
+{
+    logger.Log(ex);
+}
+catch (ArgumentNullException ex)
+{
+    logger.Log(ex);
+}
+catch (ArgumentException ex)
+{
+    logger.Log(ex);
+}
+catch (Exception ex)
+{ 
+    Console.WriteLine("Unknown Exception Occurred.");
+    UnknownExceptionDebug(ex);
+}
+
 
 [Conditional("DEBUG")]
 static void UnknownExceptionDebug(Exception ex)

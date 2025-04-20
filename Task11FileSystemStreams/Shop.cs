@@ -1,14 +1,15 @@
-﻿using Task7Exceptions.ExceptionClasses;
+﻿using Task11FileSystemStreams;
+using Task7Exceptions.ExceptionClasses;
 
 namespace Task7Exceptions;
 
 public class Shop(IRepository<Customer> customerRepository, 
-                                        IRepository<Laptop> laptopRepository, 
-                                        ExceptionLogger exceptionLogger)
+                                        IRepository<Laptop> laptopRepository)
 {
     private readonly IRepository<Customer> _customerRepository = customerRepository;
     private readonly IRepository<Laptop> _laptopRepository = laptopRepository;
-    private readonly ExceptionLogger _exceptionLogger = exceptionLogger;
+
+    public event EventHandler<BusinessOperationEventArgs>? BusinessOperation;
 
     public bool PurchaseLaptop(int customerId, int laptopId)
     {
@@ -32,26 +33,52 @@ public class Shop(IRepository<Customer> customerRepository,
             _customerRepository.Update(customer);
             _laptopRepository.Update(laptop);
 
-            Console.WriteLine($"The purchase of {laptop.Brand} {laptop.Model} has been completed successfully by {customer.Name} {customer.Surname}.");
+            var successMsg = $"The purchase of {laptop.Brand} {laptop.Model} has been completed successfully by {customer.Name} {customer.Surname}.";
+
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(PurchaseLaptop),
+                                                                   success: true,
+                                                                   message: successMsg,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(customerId)] = customerId,
+                                                                       [nameof(laptopId)] = laptopId
+                                                                   })
+            );
+
             return true;
         }
         catch(ArgumentException ex) when (ex.ParamName == "logFilePath")
         {
             throw new FileNotFoundException("The log file path is incorrect.", innerException: ex);
         }
-        catch(DataValidationException<int> ex)
+        catch(DataValidationException<int>)
         {
-            _exceptionLogger.LogException(ex);
             throw;
         }
         catch (OutOfStockException ex)
         {
-            _exceptionLogger.LogException(ex);
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(PurchaseLaptop),
+                                                                   success: false,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(customerId)] = customerId,
+                                                                       [nameof(laptopId)] = laptopId
+                                                                   },
+                                                                   exception: ex)
+            );
             return false;
         }
         catch(InsufficientBalanceException ex)
         {
-            _exceptionLogger.LogException(ex);
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(PurchaseLaptop),
+                                                                   success: false,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(customerId)] = customerId,
+                                                                       [nameof(laptopId)] = laptopId
+                                                                   },
+                                                                   exception: ex)
+            );
             return false;
         }
         catch (ArgumentNullException)
@@ -64,7 +91,15 @@ public class Shop(IRepository<Customer> customerRepository,
         }
         catch (Exception ex)
         {
-            _exceptionLogger.LogException(ex);
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(PurchaseLaptop),
+                                                                   success: false,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(customerId)] = customerId,
+                                                                       [nameof(laptopId)] = laptopId
+                                                                   },
+                                                                   exception: ex)
+            );
             return false;
         }
     }
@@ -79,7 +114,10 @@ public class Shop(IRepository<Customer> customerRepository,
         }
         catch (ArgumentException ex)
         {
-            _exceptionLogger.LogException(ex);
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(ShowAllStock),
+                                                                   success: false,
+                                                                   exception: ex)
+            );
         }
         
     }
@@ -89,11 +127,27 @@ public class Shop(IRepository<Customer> customerRepository,
         try
         {
             _laptopRepository.Add(laptop);
-            Console.WriteLine($"New latop in stock: {laptop.Brand} {laptop.Model} at only ${laptop.Price}.");
+            var successMsg = $"New latop in stock: {laptop.Brand} {laptop.Model} at only ${laptop.Price}.";
+
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(AddOnShelf),
+                                                                   success: true,
+                                                                   message: successMsg,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(laptop)] = laptop
+                                                                   })
+            );
         }
         catch (DuplicateIdException ex)
         {
-            _exceptionLogger.LogException(ex);
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(AddOnShelf),
+                                                                   success: false,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(laptop)] = laptop,
+                                                                   },
+                                                                   exception: ex)
+            );
         }
     }
 
@@ -102,14 +156,30 @@ public class Shop(IRepository<Customer> customerRepository,
         try 
         {
             _laptopRepository.Delete(laptop);
-            Console.WriteLine($"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.");
+            var successMsg = $"Laptop {laptop.Brand} {laptop.Model} is not for sale anymore.";
+
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(RemoveFromShelf),
+                                                                   success: true,
+                                                                   message: successMsg,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(laptop)] = laptop
+                                                                   })
+            );
         }
         catch (ArgumentException ex)
         {
-            _exceptionLogger.LogException(ex);
-        }
-        
+            BusinessOperation?.Invoke(this, new BusinessOperationEventArgs(methodName: nameof(RemoveFromShelf),
+                                                                   success: false,
+                                                                   parameters: new Dictionary<string, object>
+                                                                   {
+                                                                       [nameof(laptop)] = laptop
+                                                                   },
+                                                                   exception: ex)
+            );
+        }      
     }
+
     static private void ValidateIds(params int[] ids)
     {
         if (ids.Any(i => i <= 0))
