@@ -22,7 +22,7 @@ var laptopRepo = new ListRepository<Laptop>(laptops);
 var customerRepo = new ListRepository<Customer>(customers);
 
 var logger = new Logger();
-var shop = new Shop(customerRepo, laptopRepo, logger);
+var shop = new Shop(customerRepo, laptopRepo);
 
 shop.BusinessOperation += logger.Log;
 
@@ -70,15 +70,15 @@ catch (FileNotFoundException ex)
 }
 catch (DataValidationException<int> ex)
 {
-    logger.Log(ex);
+    // logger.Log(ex);
 }
 catch (ArgumentNullException ex)
 {
-    logger.Log(ex);
+    // logger.Log(ex);
 }
 catch (ArgumentException ex)
 {
-    logger.Log(ex);
+    // logger.Log(ex);
 }
 catch (Exception ex)
 { 

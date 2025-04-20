@@ -134,7 +134,7 @@ public class Shop(IRepository<Customer> customerRepository,
                                                                    message: successMsg,
                                                                    parameters: new Dictionary<string, object>
                                                                    {
-                                                                       [nameof(laptop)] = laptop
+                                                                       [nameof(laptop)] = laptop.ToString()!
                                                                    })
             );
         }
@@ -144,7 +144,7 @@ public class Shop(IRepository<Customer> customerRepository,
                                                                    success: false,
                                                                    parameters: new Dictionary<string, object>
                                                                    {
-                                                                       [nameof(laptop)] = laptop,
+                                                                       [nameof(laptop)] = laptop.ToString()!,
                                                                    },
                                                                    exception: ex)
             );
@@ -163,7 +163,7 @@ public class Shop(IRepository<Customer> customerRepository,
                                                                    message: successMsg,
                                                                    parameters: new Dictionary<string, object>
                                                                    {
-                                                                       [nameof(laptop)] = laptop
+                                                                       [nameof(laptop)] = laptop.ToString()!
                                                                    })
             );
         }
@@ -173,7 +173,7 @@ public class Shop(IRepository<Customer> customerRepository,
                                                                    success: false,
                                                                    parameters: new Dictionary<string, object>
                                                                    {
-                                                                       [nameof(laptop)] = laptop
+                                                                       [nameof(laptop)] = laptop.ToString()!
                                                                    },
                                                                    exception: ex)
             );
