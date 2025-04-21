@@ -66,7 +66,7 @@ try
     shop.ShowAllStock();
     Console.WriteLine();
 
-    Logger.ViewLog();
+    await Logger.ViewLogAsync();
 }
 catch (FileNotFoundException ex)
 {
