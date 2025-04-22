@@ -8,3 +8,13 @@ Development:
 	Sony Ko (Developer) : $21120.00
 	Tim Cook (QA Engineer) : $17512.00
 	Ben Smith (Web Developer) : $19430.40
+Development:
+	John Doe (Team Lead) : $32000.00
+	Sony Ko (Developer) : $24000.00
+	Tim Cook (QA Engineer) : $19900.00
+	Ben Smith (Web Developer) : $22080.00
+Development:
+	John Doe (Team Lead) : $28160.00
+	Sony Ko (Developer) : $21120.00
+	Tim Cook (QA Engineer) : $17512.00
+	Ben Smith (Web Developer) : $19430.40

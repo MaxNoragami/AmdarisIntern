@@ -6,7 +6,7 @@ public class Department(string name, List<Employee> employees)
     public List<Employee> Employees { get; private set; } = employees;
 
     public void SalaryChange(Transformer transform)
-        => Employees.ToList().ForEach(e => e.Salary = transform(e.Salary));
+        => Employees.ForEach(e => e.Salary = transform(e.Salary));
 }
 
 public delegate decimal Transformer(decimal val);
