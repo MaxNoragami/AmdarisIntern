@@ -89,8 +89,9 @@ Console.WriteLine($"New prices on some animals from farm2:\n{string.Join('\n', n
 var animalGroups = farm.GroupBy(a => a.Category);
 
 Console.WriteLine("Animals in 'farm' by animal category:");
-animalGroups.ToList().ForEach(category => 
-    Console.WriteLine($"* {category.Key}:\n\t{string.Join("\n\t", category)}\n"));
+
+foreach(var category in animalGroups)
+    Console.WriteLine($"* {category.Key}:\n\t{string.Join("\n\t", category)}\n");
 
 // Set
 var bothFarms = farm1.Concat(farm2);
@@ -100,7 +101,8 @@ Console.WriteLine($"Animals added to farm2:\n\t{string.Join("\n\t", additionToFa
 // Sequence In -> scalar / bool / TSource
 
 // Aggregation
-Console.WriteLine($"Total earnings after VAT: ${orders.Aggregate(0m, (total, n) => total + n.PaidAmount * 0.8m):F2}\n");
+var afterVAT = orders.Aggregate(0m, (total, n) => total + n.PaidAmount * 0.8m);
+Console.WriteLine($"Total earnings after VAT: ${afterVAT:F2}\n");
 
 // Quantifiers
 Console.WriteLine($"Is the union of 'farm1' and 'farm2' w/o additions the same as 'farm'? " +
@@ -110,4 +112,6 @@ Console.WriteLine($"Is the union of 'farm1' and 'farm2' w/o additions the same a
 farm = farm.OrderBy(a => a.Id).ToList();
 foreach (var i in Enumerable.Range(0, additionToFarm2.Count))
     farm.RemoveAt(i);
-Console.WriteLine($"After the removal of first '{additionToFarm2.Count} animals from farm:\n\t{string.Join("\n\t", farm)}'");
+
+Console.WriteLine($"After the removal of first '{additionToFarm2.Count} animals from farm:\n\t" +
+    $"{string.Join("\n\t", farm)}'");
