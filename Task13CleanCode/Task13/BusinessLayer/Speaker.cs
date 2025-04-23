@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using BusinessLayer;
 using BusinessLayer.CustomExceptions;
 
 namespace BusinessLayer
@@ -25,13 +23,15 @@ namespace BusinessLayer
         /// Register a speaker
         /// </summary>
         /// <returns>speakerID</returns>
+        /// 
+        /// Here we have SqlServerCompactRepository repository
         public int? Register(IRepository repository)
         {
             //lets init some vars
             int? speakerId = null;
             bool good = false;
             bool appr = false;
-            //var nt = new List<string> {"MVC4", "Node.js", "CouchDB", "KendoUI", "Dapper", "Angular"};
+
             var ot = new List<string>() { "Cobol", "Punch Cards", "Commodore", "VBScript" };
 
             //DEFECT #5274 DA 12/10/2012
@@ -74,15 +74,6 @@ namespace BusinessLayer
                             {
                                 foreach (var session in Sessions)
                                 {
-                                    //foreach (var tech in nt)
-                                    //{
-                                    //    if (session.Title.Contains(tech))
-                                    //    {
-                                    //        session.Approved = true;
-                                    //        break;
-                                    //    }
-                                    //}
-
                                     foreach (var tech in ot)
                                     {
                                         if (session.Title.Contains(tech) || session.Description.Contains(tech))
@@ -105,12 +96,6 @@ namespace BusinessLayer
 
                             if (appr)
                             {
-
-
-
-
-
-
                                 //if we got this far, the speaker is approved
                                 //let's go ahead and register him/her now.
                                 //First, let's calculate the registration fee. 
@@ -135,8 +120,6 @@ namespace BusinessLayer
                                 {
                                     RegistrationFee = 0;
                                 }
-
-
 
                                 //Now, save the speaker and sessions to the db.
                                 try
