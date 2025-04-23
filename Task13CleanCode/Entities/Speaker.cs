@@ -7,7 +7,7 @@ public class Speaker
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
-    public int? Exp { get; set; }
+    public int? Experience { get; set; }
     public bool HasBlog { get; set; }
     public string BlogURL { get; set; }
     public WebBrowser Browser { get; set; }

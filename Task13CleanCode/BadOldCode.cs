@@ -34,12 +34,6 @@ namespace BusinessLayer
             int? speakerId = null;
             bool good = false;
             bool appr = false;
-            //var nt = new List<string> {"MVC4", "Node.js", "CouchDB", "KendoUI", "Dapper", "Angular"};
-            var ot = new List<string>() { "Cobol", "Punch Cards", "Commodore", "VBScript" };
-
-            //DEFECT #5274 DA 12/10/2012
-            //We weren't filtering out the prodigy domain so I added it.
-            var domains = new List<string>() { "aol.com", "hotmail.com", "prodigy.com", "CompuServe.com" };
 
             if (!string.IsNullOrWhiteSpace(FirstName))
             {
@@ -50,7 +44,6 @@ namespace BusinessLayer
                     if (!string.IsNullOrWhiteSpace(Email))
                     {
                         //put list of employers in array
-                        var emps = new List<string>() { "Microsoft", "Google", "Fog Creek Software", "37Signals" };
 
                         //DFCT #838 Jimmy 
                         //We're now requiring 3 certifications so I changed the hard coded number. Boy, programming is hard.
@@ -77,14 +70,6 @@ namespace BusinessLayer
                             {
                                 foreach (var session in Sessions)
                                 {
-                                    //foreach (var tech in nt)
-                                    //{
-                                    //    if (session.Title.Contains(tech))
-                                    //    {
-                                    //        session.Approved = true;
-                                    //        break;
-                                    //    }
-                                    //}
 
                                     foreach (var tech in ot)
                                     {
@@ -180,26 +165,5 @@ namespace BusinessLayer
             //if we got this far, the speaker is registered.
             return speakerId;
         }
-
-        //#region Custom Exceptions
-        //public class SpeakerDoesntMeetRequirementsException : Exception
-        //{
-        //    public SpeakerDoesntMeetRequirementsException(string message)
-        //        : base(message)
-        //    {
-        //    }
-
-        //    public SpeakerDoesntMeetRequirementsException(string format, params object[] args)
-        //        : base(string.Format(format, args)) { }
-        //}
-
-        //public class NoSessionsApprovedException : Exception
-        //{
-        //    public NoSessionsApprovedException(string message)
-        //        : base(message)
-        //    {
-        //    }
-        //}
-        //#endregion
     }
 }
