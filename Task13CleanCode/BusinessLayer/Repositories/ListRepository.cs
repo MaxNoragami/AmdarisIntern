@@ -5,11 +5,14 @@ namespace BusinessLayer.Repositories;
 
 public class ListRepository() : IRepository
 {
-    private readonly List<Speaker> _speakers = new List<Speaker>();
+    private static readonly List<Speaker> _speakers = new List<Speaker>();
 
     public int SaveSpeaker(Speaker speaker)
     {
         _speakers.Add(speaker);
         return _speakers.IndexOf(speaker);
     }
+
+    public IReadOnlyCollection<Speaker> GetAllSpeakers()
+        => _speakers;
 }

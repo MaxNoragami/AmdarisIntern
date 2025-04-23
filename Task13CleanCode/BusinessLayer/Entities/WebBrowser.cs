@@ -1,4 +1,6 @@
-﻿namespace BusinessLayer.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace BusinessLayer.Entities;
 
 public class WebBrowser
 {
