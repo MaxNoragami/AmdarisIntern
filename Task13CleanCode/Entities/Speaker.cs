@@ -1,6 +1,4 @@
-﻿using BusinessLayer.Entities;
-
-namespace Task13CleanCode.Entities;
+﻿namespace Task13CleanCode.Entities;
 
 public class Speaker
 {

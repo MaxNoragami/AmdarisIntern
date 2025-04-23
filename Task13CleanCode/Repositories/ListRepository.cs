@@ -1,4 +1,4 @@
-﻿using BusinessLayer;
+﻿using Task13CleanCode.Entities;
 using Task13CleanCode.Interfaces;
 
 namespace Task13CleanCode.Repositories;

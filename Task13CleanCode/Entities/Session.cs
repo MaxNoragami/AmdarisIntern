@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.Entities;
+﻿namespace Task13CleanCode.Entities;
 
 /// <summary>
 /// Represents a single conference session

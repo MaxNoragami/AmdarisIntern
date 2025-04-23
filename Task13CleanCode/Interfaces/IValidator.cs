@@ -2,7 +2,7 @@
 
 namespace Task13CleanCode.Interfaces;
 
-public interface IRepository
+public interface IValidator
 {
-    int SaveSpeaker(Speaker speaker);
+    public void Validate(Speaker speaker);
 }
