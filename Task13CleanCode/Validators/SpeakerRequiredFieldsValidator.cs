@@ -3,7 +3,7 @@ using Task13CleanCode.Interfaces;
 
 namespace Task13CleanCode.Validators;
 
-public class SpeakerRequiredFieldsValidator : IValidator
+public class SpeakerRequiredFieldsValidator : ISpeakerValidatorComponent
 {
     public void Validate(Speaker speaker)
     {

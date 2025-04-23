@@ -5,7 +5,7 @@ using Task13CleanCode.Exceptions;
 
 namespace Task13CleanCode.Validators;
 
-public class SpeakerEmailValidator : IValidator
+public class SpeakerEmailValidator : ISpeakerValidatorComponent
 {
     public void Validate(Speaker speaker)
     {
