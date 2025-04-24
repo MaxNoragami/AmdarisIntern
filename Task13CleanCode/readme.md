@@ -55,7 +55,6 @@
     "Microsoft", "Another", "Diploma"
   ],
   "employer": "Google",
-  "registrationFee": 0,
   "sessions": [
     {
       "title": "Yolo",
