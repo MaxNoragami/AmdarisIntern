@@ -1,9 +1,11 @@
-﻿namespace Task14CreationalPatterns.CoffeeBuilders;
+﻿namespace Task14CreationalPatterns.Builders;
 
 public interface IBeverageBuilder
 {
     public void Reset();
+    public IBeverageBuilder SetType(CoffeeType coffeeType);
     public IBeverage Make();
+    T GetCapability<T>() where T : class;
 }
 
 public interface IBlackCoffeeAble

@@ -1,9 +1,9 @@
 ﻿namespace Task14CreationalPatterns;
 
-public class Coffee(CoffeeType coffeeType) : IBeverage
+public class Coffee : IBeverage
 {
     private readonly List<IIngredient> _ingredients = [];
-    private readonly CoffeeType _coffeeType = coffeeType;
+    public CoffeeType Type { get; set; }
 
     public void Add(IIngredient ingredient)
         => _ingredients.Add(ingredient);
@@ -17,7 +17,7 @@ public class Coffee(CoffeeType coffeeType) : IBeverage
                                     .ToDictionary(m => m.Key, m => m.Count())
                                     .Select(m => $"{m.Key} : {m.Value}");
 
-        string result = $"Coffee Type: {_coffeeType}\n" +
+        string result = $"Coffee Type: {Type}\n" +
                     $"\tCoffee Shots: {coffeeShots}\n" +
                     $"\tMilk Shots: {string.Join(", ", milkShots)}\n" +
                     $"\tSugar Cubes: {sugarCubes}\n";
