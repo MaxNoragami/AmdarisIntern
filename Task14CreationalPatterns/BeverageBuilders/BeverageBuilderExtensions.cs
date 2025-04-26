@@ -1,4 +1,6 @@
-﻿namespace Task14CreationalPatterns.Builders;
+﻿using Task14CreationalPatterns.Beverages;
+
+namespace Task14CreationalPatterns.BeverageBuilders;
 
 public static class BeverageBuilderExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace Task14CreationalPatterns;
+﻿namespace Task14CreationalPatterns.Beverages;
 
 public interface IIngredient;
 public record CoffeeShot : IIngredient;

@@ -1,4 +1,6 @@
-﻿namespace Task14CreationalPatterns;
+﻿using Task14CreationalPatterns.Beverages;
+
+namespace Task14CreationalPatterns;
 
 public class Coffee : IBeverage
 {
@@ -16,10 +18,13 @@ public class Coffee : IBeverage
                                     .GroupBy(m => m.MilkType)
                                     .ToDictionary(m => m.Key, m => m.Count())
                                     .Select(m => $"{m.Key} : {m.Value}");
+        var milkShotsStatistic = milkShots.Any()
+                                    ? $"\tMilk Shots: {string.Join(", ", milkShots)}\n" 
+                                    : string.Empty;
 
         string result = $"Coffee Type: {Type}\n" +
                     $"\tCoffee Shots: {coffeeShots}\n" +
-                    $"\tMilk Shots: {string.Join(", ", milkShots)}\n" +
+                    milkShotsStatistic +
                     $"\tSugar Cubes: {sugarCubes}\n";
 
         return result;

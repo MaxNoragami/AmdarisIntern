@@ -1,12 +1,13 @@
-﻿namespace Task14CreationalPatterns.Builders;
+﻿using Task14CreationalPatterns.Beverages;
+
+namespace Task14CreationalPatterns.BeverageBuilders;
 
 public class CoffeeBuilder : IBeverageBuilder, IBlackCoffeeAble, IMilkAble, ISugarAble
 {
     private Coffee _beverage;
-    private CoffeeType _coffeeType;
 
     public CoffeeBuilder()
-        => Reset();
+        => _beverage = new Coffee();
 
     public IBeverageBuilder SetType(CoffeeType coffeeType)
     {
@@ -41,6 +42,6 @@ public class CoffeeBuilder : IBeverageBuilder, IBlackCoffeeAble, IMilkAble, ISug
     public void Reset()
         => _beverage = new Coffee();
 
-    public T GetCapability<T>() where T : class
+    public T? GetCapability<T>() where T : class
         => this as T;
 }

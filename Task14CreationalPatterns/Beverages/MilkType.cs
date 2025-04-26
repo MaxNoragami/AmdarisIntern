@@ -1,4 +1,4 @@
-﻿namespace Task14CreationalPatterns;
+﻿namespace Task14CreationalPatterns.Beverages;
 
 public enum MilkType
 {
