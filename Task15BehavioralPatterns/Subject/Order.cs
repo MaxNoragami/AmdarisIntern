@@ -5,6 +5,8 @@ namespace Task15BehavioralPatterns.Subject;
 public class Order(int orderId) : IOrderSubject
 {
     private OrderStatus _status;
+    private List<IOrderObserver> orderObservers = new List<IOrderObserver>();
+
     public int Id => orderId;
     public List<Book> Books { get; private set; } = new List<Book>();
     public OrderStatus Status
@@ -26,14 +28,10 @@ public class Order(int orderId) : IOrderSubject
     }
 
     public void Register(IOrderObserver orderObserver)
-    {
-        throw new NotImplementedException();
-    }
+        => orderObservers.Add(orderObserver);
 
     public void Unregister(IOrderObserver orderObserver)
-    {
-        throw new NotImplementedException();
-    }
+        => orderObservers.Remove(orderObserver);
 
     // Business Logic
 

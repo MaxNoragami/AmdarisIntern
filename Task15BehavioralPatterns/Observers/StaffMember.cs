@@ -5,14 +5,10 @@ namespace Task15BehavioralPatterns.Observers;
 public class StaffMember : IOrderObserver
 {
     public void SubscribeToOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
+        => order.Register(this);
 
     public void UnsubscribeToOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
+        => order.Unregister(this);
 
     public void Update(Order order)
     {
