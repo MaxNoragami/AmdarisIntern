@@ -13,6 +13,7 @@ public class OrderService
 
         order.AddBooks(books);
         customer.SubscribeToOrder(order);
+        order.Status = OrderStatus.Paid;
 
         return order;
     }

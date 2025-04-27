@@ -2,13 +2,13 @@
 
 namespace Task15BehavioralPatterns.Subject;
 
-public class Order(int orderId) : IOrderSubject
+public partial class Order(int orderId) : IOrderSubject
 {
     private OrderStatus _status;
-    private List<IOrderObserver> orderObservers = new List<IOrderObserver>();
+    private List<IOrderObserver> _orderObservers = new List<IOrderObserver>();
+    private readonly List<Book> _books = new List<Book>();
 
     public int Id => orderId;
-    public List<Book> Books { get; private set; } = new List<Book>();
     public OrderStatus Status
     {
         get => _status;
@@ -24,17 +24,13 @@ public class Order(int orderId) : IOrderSubject
 
     public void NotifyObservers()
     {
-        throw new NotImplementedException();
+        foreach (var observer in _orderObservers)
+            observer.Update(this);
     }
 
     public void Register(IOrderObserver orderObserver)
-        => orderObservers.Add(orderObserver);
+        => _orderObservers.Add(orderObserver);
 
     public void Unregister(IOrderObserver orderObserver)
-        => orderObservers.Remove(orderObserver);
-
-    // Business Logic
-
-    public void AddBooks(List<Book> books)
-        => Books.AddRange(books);
+        => _orderObservers.Remove(orderObserver);
 }

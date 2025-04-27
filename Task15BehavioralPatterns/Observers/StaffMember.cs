@@ -2,7 +2,7 @@
 
 namespace Task15BehavioralPatterns.Observers;
 
-public class StaffMember : IOrderObserver
+public record StaffMember(string FullName, string EmailAddress, Department Department) : IOrderObserver
 {
     public void SubscribeToOrder(Order order)
         => order.Register(this);
