@@ -9,11 +9,10 @@ public class OrderService
 
     public Order CreateOrder(Customer customer, List<Book> books)
     {
-        var order = new Order(_nextOrderId++);
+        var order = new Order(++_nextOrderId);
 
         order.AddBooks(books);
         customer.SubscribeToOrder(order);
-        order.Status = OrderStatus.Paid;
 
         return order;
     }

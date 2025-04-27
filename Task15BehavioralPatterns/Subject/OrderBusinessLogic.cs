@@ -14,6 +14,7 @@ public partial class Order
 
         string info = $"Order #{Id}\n" +
                 $"\tStatus: {_status}\n" +
+                $"\tTotal: ${CalculateTotals():F2}\n" +
                 $"\tBooks: {booksInfo}\n";
 
         return info;

@@ -1,4 +1,4 @@
-﻿namespace Task15BehavioralPatterns;
+﻿namespace Task15BehavioralPatterns.Subject;
 
 public record Book(string Title, string Author, decimal Price)
 {
