@@ -1,4 +1,4 @@
-﻿namespace Task16StructuralPatterns;
+﻿namespace Task16StructuralPatterns.Decorators;
 
 public class ItalicDecorator(IFormatter formatter) : BaseDecorator(formatter)
 {

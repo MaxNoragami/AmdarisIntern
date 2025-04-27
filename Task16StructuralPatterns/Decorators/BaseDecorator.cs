@@ -1,4 +1,4 @@
-﻿namespace Task16StructuralPatterns;
+﻿namespace Task16StructuralPatterns.Decorators;
 
 public abstract class BaseDecorator(IFormatter formatter) : IFormatter
 {

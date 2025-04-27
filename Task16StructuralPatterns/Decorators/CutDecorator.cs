@@ -1,4 +1,4 @@
-﻿namespace Task16StructuralPatterns;
+﻿namespace Task16StructuralPatterns.Decorators;
 
 public class CutDecorator(IFormatter formatter) : BaseDecorator(formatter)
 {
