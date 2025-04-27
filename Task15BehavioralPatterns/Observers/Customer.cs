@@ -11,7 +11,7 @@ public record Customer(string FullName, string EmailAddress, string PhoneNumber)
         => order.Unregister(this);
 
     public void Update(Order order)
-    {
-        throw new NotImplementedException();
-    }
+        => Console.WriteLine("**** Email Sent ****\n" +
+            $"To: {EmailAddress}\n" +
+            $"Message: Your Order #{order.Id} status updated to {order.Status}.\n");
 }

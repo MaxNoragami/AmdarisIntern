@@ -12,6 +12,13 @@ public record StaffMember(string FullName, string EmailAddress, Department Depar
 
     public void Update(Order order)
     {
-        throw new NotImplementedException();
+        if(Department == Department.Warehouse && order.Status == OrderStatus.Paid)
+            Console.WriteLine("**** Email Sent ****\n" +
+            $"To: {EmailAddress}\n" +
+            $"Message: Order #{order.Id} needs to to be proccessed.\n");
+        else if(Department == Department.Delivery && order.Status == OrderStatus.Processed)
+            Console.WriteLine("**** Email Sent ****\n" +
+            $"To: {EmailAddress}\n" +
+            $"Message: Order #{order.Id} needs to to be shipped.\n");
     }
 }
