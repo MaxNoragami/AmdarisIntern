@@ -13,7 +13,18 @@ public class PalindromeServiceTest
     [InlineData("hannah", true)]
     [InlineData("rotator", true)]
     [InlineData("tractor", false)]
-    public void IsPalindrome_mom_Test(string word, bool isPalindromeExpected)
+    public void IsPalindromeBasicWordsTest(string word, bool isPalindromeExpected)
+    {
+        var result = _palindromeService.IsPalindrome(word);
+
+        Assert.Equal(isPalindromeExpected, result);
+    }
+
+    [Theory]
+    [InlineData("", true)]
+    [InlineData(null, true)]
+    [InlineData("z", true)]
+    public void IsPalindromeEdgeCasesTest(string word, bool isPalindromeExpected)
     {
         var result = _palindromeService.IsPalindrome(word);
 
