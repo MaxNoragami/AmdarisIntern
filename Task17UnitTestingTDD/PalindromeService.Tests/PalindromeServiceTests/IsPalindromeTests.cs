@@ -2,40 +2,39 @@
 
 public class IsPalindromeTests
 {
-    private readonly PalindromeService _palindromeService;
+    private readonly IPalindromeService _palindromeService;
+
+    public static TheoryData<string, bool> BasicWordsData = new TheoryData<string, bool>()
+    {
+        { "mom", true },
+        { "john", false },
+        { "hannah", true },
+        { "rotator", true },
+        { "tractor", false },
+    };
+
+    public static TheoryData<string, bool> EdgeCasesData = new TheoryData<string, bool>()
+    {
+        { "", true },
+        { null, true },
+        { "z", true },
+    };
+
+    public static TheoryData<string, bool> CaseInsensitiveData = new TheoryData<string, bool>()
+    {
+        { "YoYOy", true },
+        { "Panama", false },
+        { "UFOtofu", true },
+    };
 
     public IsPalindromeTests()
         =>  _palindromeService = new PalindromeService();
 
     [Theory]
-    [InlineData("mom", true)]
-    [InlineData("john", false)]
-    [InlineData("hannah", true)]
-    [InlineData("rotator", true)]
-    [InlineData("tractor", false)]
-    public void IsPalindromeBasicWordsTest(string word, bool isPalindromeExpected)
-    {
-        var result = _palindromeService.IsPalindrome(word);
-
-        Assert.Equal(isPalindromeExpected, result);
-    }
-
-    [Theory]
-    [InlineData("", true)]
-    [InlineData(null, true)]
-    [InlineData("z", true)]
-    public void IsPalindromeEdgeCasesTest(string word, bool isPalindromeExpected)
-    {
-        var result = _palindromeService.IsPalindrome(word);
-
-        Assert.Equal(isPalindromeExpected, result);
-    }
-
-    [Theory]
-    [InlineData("YoYOy", true)]
-    [InlineData("Panama", false)]
-    [InlineData("UFOtofu", true)]
-    public void IsPalindromeCaseInsensitiveTest(string word, bool isPalindromeExpected)
+    [MemberData(nameof(BasicWordsData))]
+    [MemberData(nameof(EdgeCasesData))]
+    [MemberData(nameof(CaseInsensitiveData))]
+    public void IsPalindromeTest(string word, bool isPalindromeExpected)
     {
         var result = _palindromeService.IsPalindrome(word);
 

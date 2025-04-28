@@ -1,8 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace PalindromeService;
+public interface IPalindromeService
+{
+    public bool IsPalindrome(string input);
+    public string Normalize(string input);
+}
 
-public class PalindromeService
+public class PalindromeService : IPalindromeService
 {
     public bool IsPalindrome(string input)
     {

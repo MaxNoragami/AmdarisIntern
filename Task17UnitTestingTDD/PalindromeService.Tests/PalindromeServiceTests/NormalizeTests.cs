@@ -11,7 +11,7 @@ public class InputCleanUpTestData : TheoryData<string, string>
 
 public class NormalizeTests
 {
-    private readonly PalindromeService _palindromeService;
+    private readonly IPalindromeService _palindromeService;
 
     public static TheoryData<string, string> WordsToLowerTestData => new TheoryData<string, string>()
     {
@@ -24,16 +24,8 @@ public class NormalizeTests
 
     [Theory]
     [MemberData(nameof(WordsToLowerTestData))]
-    public void NormalizeWordsToLowerTest(string input, string outputExpected)
-    {
-        var result = _palindromeService.Normalize(input);
-
-        Assert.Equal(outputExpected, result);
-    }
-
-    [Theory]
     [ClassData(typeof(InputCleanUpTestData))]
-    public void NormalizeInputCleanUpTest(string input, string outputExpected)
+    public void NormalizeTest(string input, string outputExpected)
     {
         var result = _palindromeService.Normalize(input);
 
