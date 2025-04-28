@@ -1,10 +1,10 @@
 ﻿namespace PalindromeService.Tests.PalindromeServiceTests;
 
-public class PalindromeServiceTest
+public class IsPalindromeTests
 {
-    private PalindromeService _palindromeService;
+    private readonly PalindromeService _palindromeService;
 
-    public PalindromeServiceTest()
+    public IsPalindromeTests()
         =>  _palindromeService = new PalindromeService();
 
     [Theory]
@@ -33,7 +33,7 @@ public class PalindromeServiceTest
 
     [Theory]
     [InlineData("YoYOy", true)]
-    [InlineData("Panama", true)]
+    [InlineData("Panama", false)]
     [InlineData("UFOtofu", true)]
     public void IsPalindromeCaseInsensitiveTest(string word, bool isPalindromeExpected)
     {

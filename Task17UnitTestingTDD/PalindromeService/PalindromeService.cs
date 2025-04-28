@@ -1,12 +1,19 @@
-﻿namespace PalindromeService;
+﻿using System.Text.RegularExpressions;
+
+namespace PalindromeService;
 
 public class PalindromeService
 {
-    public bool IsPalindrome(string word)
+    public bool IsPalindrome(string input)
     {
-        if (string.IsNullOrWhiteSpace(word))
+        if (string.IsNullOrWhiteSpace(input))
             return true;
 
-        return word == string.Join("", word.Reverse());
+        var normalizedInput = Normalize(input);
+
+        return normalizedInput == string.Join("", normalizedInput.Reverse());
     }
+
+    public string Normalize(string input)
+        => Regex.Replace(input, @"[.,!?\- ]+", string.Empty).ToLower();
 }
