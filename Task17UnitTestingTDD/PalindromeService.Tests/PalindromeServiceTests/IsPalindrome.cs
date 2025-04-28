@@ -1,4 +1,4 @@
-﻿namespace PalindromeService.Tests;
+﻿namespace PalindromeService.Tests.PalindromeServiceTests;
 
 public class PalindromeServiceTest
 {
@@ -25,6 +25,17 @@ public class PalindromeServiceTest
     [InlineData(null, true)]
     [InlineData("z", true)]
     public void IsPalindromeEdgeCasesTest(string word, bool isPalindromeExpected)
+    {
+        var result = _palindromeService.IsPalindrome(word);
+
+        Assert.Equal(isPalindromeExpected, result);
+    }
+
+    [Theory]
+    [InlineData("YoYOy", true)]
+    [InlineData("Panama", true)]
+    [InlineData("UFOtofu", true)]
+    public void IsPalindromeCaseInsensitiveTest(string word, bool isPalindromeExpected)
     {
         var result = _palindromeService.IsPalindrome(word);
 
