@@ -1,9 +1,14 @@
 ﻿namespace PalindromeService.Tests;
 
-public class UnitTest1
+public class PalindromeServiceTest
 {
+    private PalindromeService _palindromeService;
+
+    public PalindromeServiceTest()
+        =>  _palindromeService = new PalindromeService();
+
     [Fact]
-    public void Test1()
+    public void IsPalindromeTest()
     {
 
     }
