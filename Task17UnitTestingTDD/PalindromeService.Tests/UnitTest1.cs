@@ -7,19 +7,16 @@ public class PalindromeServiceTest
     public PalindromeServiceTest()
         =>  _palindromeService = new PalindromeService();
 
-    [Fact]
-    public void IsPalindrome_mom_Test()
+    [Theory]
+    [InlineData("mom", true)]
+    [InlineData("john", false)]
+    [InlineData("hannah", true)]
+    [InlineData("rotator", true)]
+    [InlineData("tractor", false)]
+    public void IsPalindrome_mom_Test(string word, bool isPalindromeExpected)
     {
-        var result = _palindromeService.IsPalindrome("mom");
+        var result = _palindromeService.IsPalindrome(word);
 
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void IsPalindrome_john_Test()
-    {
-        var result = _palindromeService.IsPalindrome("john");
-
-        Assert.False(result);
+        Assert.Equal(isPalindromeExpected, result);
     }
 }
