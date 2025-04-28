@@ -1,4 +1,6 @@
-﻿namespace PalindromeService.Tests.PalindromeServiceTests;
+﻿using Moq;
+
+namespace PalindromeService.Tests.PalindromeServiceTests;
 
 public class InputCleanUpTestData : TheoryData<string, string>
 {
@@ -12,6 +14,7 @@ public class InputCleanUpTestData : TheoryData<string, string>
 public class NormalizeTests
 {
     private readonly IPalindromeService _palindromeService;
+    private readonly Mock<ILogger> _loggerMock;
 
     public static TheoryData<string, string> WordsToLowerTestData => new TheoryData<string, string>()
     {
@@ -20,7 +23,10 @@ public class NormalizeTests
     };
 
     public NormalizeTests()
-        => _palindromeService = new PalindromeService();
+    {
+        _loggerMock = new Mock<ILogger>();
+        _palindromeService = new PalindromeService(_loggerMock.Object);
+    }
 
     [Theory]
     [MemberData(nameof(WordsToLowerTestData))]

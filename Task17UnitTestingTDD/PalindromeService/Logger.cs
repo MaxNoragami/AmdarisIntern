@@ -1,4 +1,6 @@
-﻿namespace PalindromeService;
+﻿using System.Diagnostics;
+
+namespace PalindromeService;
 
 public interface ILogger
 {
@@ -14,6 +16,22 @@ public class Logger : ILogger
             logWriter.WriteLine(message);
             logWriter.WriteLine();
             logWriter.Flush();
+        }
+    }
+}
+
+public class SafeLogger(ILogger logger) : ILogger
+{
+    private readonly ILogger _logger = logger;
+    public void Log(string message)
+    {
+        try
+        {
+            _logger.Log(message);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"FAILURE: {ex.Message}");
         }
     }
 }

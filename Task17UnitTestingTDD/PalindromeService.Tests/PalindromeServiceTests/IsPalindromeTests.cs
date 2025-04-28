@@ -1,8 +1,11 @@
-﻿namespace PalindromeService.Tests.PalindromeServiceTests;
+﻿using Moq;
+
+namespace PalindromeService.Tests.PalindromeServiceTests;
 
 public class IsPalindromeTests
 {
     private readonly IPalindromeService _palindromeService;
+    private readonly Mock<ILogger> _loggerMock;
 
     public static TheoryData<string, bool> BasicWordsData = new TheoryData<string, bool>()
     {
@@ -16,7 +19,7 @@ public class IsPalindromeTests
     public static TheoryData<string, bool> EdgeCasesData = new TheoryData<string, bool>()
     {
         { "", true },
-        { null, true },
+        { null!, true },
         { "z", true },
     };
 
@@ -28,16 +31,28 @@ public class IsPalindromeTests
     };
 
     public IsPalindromeTests()
-        =>  _palindromeService = new PalindromeService();
+    {
+        _loggerMock = new Mock<ILogger>();
+        _palindromeService = new PalindromeService(_loggerMock.Object);
+    }
 
     [Theory]
     [MemberData(nameof(BasicWordsData))]
     [MemberData(nameof(EdgeCasesData))]
     [MemberData(nameof(CaseInsensitiveData))]
-    public void IsPalindromeTest(string word, bool isPalindromeExpected)
+    public void IsPalindromeTest(string input, bool isPalindromeExpected)
     {
-        var result = _palindromeService.IsPalindrome(word);
+        var result = _palindromeService.IsPalindrome(input);
 
         Assert.Equal(isPalindromeExpected, result);
+
+        _loggerMock.Verify(
+                logger => logger.Log(It.Is<string>(message => 
+                        message.Contains($"Checking if '{input}' is a palindrome"))), 
+                Times.Once);
+        _loggerMock.Verify(
+                logger => logger.Log(It.Is<string>(message => 
+                        message.Contains($"Result for '{input}': {isPalindromeExpected}"))), 
+                Times.AtMostOnce);
     }
 }

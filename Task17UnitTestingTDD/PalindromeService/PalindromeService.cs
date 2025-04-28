@@ -7,16 +7,23 @@ public interface IPalindromeService
     public string Normalize(string input);
 }
 
-public class PalindromeService : IPalindromeService
+public class PalindromeService(ILogger logger) : IPalindromeService
 {
+    private readonly ILogger _logger = logger;
+
     public bool IsPalindrome(string input)
     {
+        _logger.Log($"Checking if '{input}' is a palindrome");
+
         if (string.IsNullOrWhiteSpace(input))
             return true;
 
         var normalizedInput = Normalize(input);
+        var result = normalizedInput == string.Join("", normalizedInput.Reverse());
 
-        return normalizedInput == string.Join("", normalizedInput.Reverse());
+        _logger.Log($"Result for '{input}': {result}");
+
+        return result;
     }
 
     public string Normalize(string input)
