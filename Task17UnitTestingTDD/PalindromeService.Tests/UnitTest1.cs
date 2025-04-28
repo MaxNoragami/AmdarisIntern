@@ -14,4 +14,12 @@ public class PalindromeServiceTest
 
         Assert.True(result);
     }
+
+    [Fact]
+    public void IsPalindrome_john_Test()
+    {
+        var result = _palindromeService.IsPalindrome("john");
+
+        Assert.False(result);
+    }
 }
