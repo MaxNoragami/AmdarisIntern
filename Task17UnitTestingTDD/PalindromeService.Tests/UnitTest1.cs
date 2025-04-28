@@ -8,8 +8,10 @@ public class PalindromeServiceTest
         =>  _palindromeService = new PalindromeService();
 
     [Fact]
-    public void IsPalindromeTest()
+    public void IsPalindrome_mom_Test()
     {
+        var result = _palindromeService.IsPalindrome("mom");
 
+        Assert.True(result);
     }
 }
