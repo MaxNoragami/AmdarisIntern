@@ -8,9 +8,9 @@ by lastname.
 USE AdventureWorks2019
 
 SELECT FirstName, 
-		LastName, 
-		BusinessEntityID AS Employee_id 
-	FROM Person.Person
+	LastName, 
+	BusinessEntityID AS Employee_id 
+FROM Person.Person
 ORDER BY LastName
 
 ------------------------------------------------------------------------
@@ -24,10 +24,10 @@ firstname.
 USE AdventureWorks2019
 
 SELECT PP.BusinessEntityID, 
-		P.FirstName, 
-		P.LastName, 
-		PP.PhoneNumber 
-	FROM Person.PersonPhone AS PP
+	P.FirstName, 
+	P.LastName, 
+	PP.PhoneNumber 
+FROM Person.PersonPhone AS PP
 INNER JOIN Person.Person AS P
 	ON P.BusinessEntityID = PP.BusinessEntityID
 WHERE P.LastName LIKE 'L%'
@@ -48,10 +48,10 @@ postalcode in ascending order.
 USE AdventureWorks2019
 
 SELECT ROW_NUMBER() OVER (PARTITION BY A.PostalCode ORDER BY SP.SalesYTD DESC) AS RowNumber, 
-		PP.LastName, 
-		SP.SalesYTD, 
-		A.PostalCode
-	FROM Sales.SalesPerson AS SP
+	PP.LastName, 
+	SP.SalesYTD, 
+	A.PostalCode
+FROM Sales.SalesPerson AS SP
 INNER JOIN Person.Person AS PP
 	ON SP.BusinessEntityID = PP.BusinessEntityID
 INNER JOIN Person.BusinessEntityAddress AS BEA
@@ -73,7 +73,7 @@ exceeds 100000. Return SalesOrderID, total cost.
 USE AdventureWorks2019
 
 SELECT SalesOrderID,
-		SUM(LineTotal) AS TotalCost
-	FROM Sales.SalesOrderDetail
+	SUM(LineTotal) AS TotalCost
+FROM Sales.SalesOrderDetail
 GROUP BY SalesOrderID
 HAVING SUM(LineTotal) > 100000
